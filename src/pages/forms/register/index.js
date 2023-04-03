@@ -1,9 +1,7 @@
-import loginTemplate from "./register.hbs";
-import "./register.module.scss";
-import Handlebars from "handlebars";
+import registerTemplate from "./register.hbs";
+import classes from "../forms.module.scss";
 
 const register = () => {
-  const temp = Handlebars.compile(loginTemplate);
   const context = {
     title: "Регистрация",
     email: "Почта",
@@ -15,9 +13,16 @@ const register = () => {
     passwordConfirm: "Пароль (ещё раз)",
     submitButton: "Зарегистрироваться",
     enterLink: "Войти",
+    formWrapper: classes.form__wrapper,
+    form: classes.form,
+    formTitle: classes.form__title,
+    formInputs: classes.form__inputs,
+    inputTitle: classes.input__title,
+    formSubmit: classes.form__submit,
+    formSameBtn: classes.form__same_btn,
   };
 
-  return temp(context);
+  return registerTemplate(context);
 };
 
 

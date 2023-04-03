@@ -9,8 +9,8 @@
 .form {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: space-around;
     width: 340px;
     min-height: 450px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
@@ -18,7 +18,7 @@
 
     &__title {
         font-size: 20px;
-        line-height: 20px;
+        padding: 10px;
     }
 
     &__inputs {
@@ -26,7 +26,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 30px;
+        gap: 20px;
+        flex-grow: 1;
         padding-bottom: 20px;
 
         label {
@@ -67,13 +68,14 @@
         border: none;
         color: white;
         transition: 0.3s ease;
+        margin-bottom: 10px;
 
         &:hover {
             background: darken(#3369F3, 20%);
         }
     }
 
-    &__enter {
+    &__same_btn {
         font-size: 11px;
         color: #3369F3;
         margin-bottom: 10px;

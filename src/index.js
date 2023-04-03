@@ -1,5 +1,5 @@
-import login from "./pages/login";
-import register from "./pages/register";
+import login from "./pages/forms/login";
+import register from "./pages/forms/register";
 
 const pages = () => {
 //    return login();
@@ -10,8 +10,8 @@ const root = document.querySelector("#root");
 root.innerHTML = pages();
 
 // ==== Login form ====
-const inputs = document.querySelectorAll('.form__inputs input');
-const labels = document.querySelectorAll('.form__inputs label');
+const inputs = document.querySelectorAll('.formInputs input');
+const labels = document.querySelectorAll('.formInputs label');
 
 inputs.forEach(input =>
     input.addEventListener('change', () => {
