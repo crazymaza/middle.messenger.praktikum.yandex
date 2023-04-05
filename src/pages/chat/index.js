@@ -1,6 +1,11 @@
 import chatTemplate from "./chat.hbs";
 import classes from "./chat.module.scss";
+import Handlebars from 'handlebars';
 
+Handlebars.registerPartial('dots', (value) => {
+  const stringText = String(value);
+  return stringText.length > 2 ? `${stringText.slice(0,2)}..` : value;
+});
 const chat = () => {
   const context = {
     chatWrapper: classes.chat__wrapper,
@@ -22,6 +27,7 @@ const chat = () => {
       {title: 'Pavel', subtitle: 'Message', date: 'Mon', new: 0},
       {title: 'Anna', subtitle: 'Message', date: 'Mon', new: 11},
       {title: 'Polina', subtitle: 'Message', date: 'Mon', new: 0},
+      {title: 'Igor', subtitle: 'Message', date: 'Mon', new: 100444},
     ]
   };
 

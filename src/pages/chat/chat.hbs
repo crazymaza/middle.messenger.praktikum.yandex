@@ -1,6 +1,6 @@
 <div class={{chatWrapper}}>
     <section class={{chatLeftSection}}>
-        <a href="" class={{profile}}>Профиль <span>></span></a>
+        <a href="/profile" class={{profile}}>Профиль <span>></span></a>
         <input type="text" class={{search}} placeholder="&#128269;&nbsp;Поиск">
         <ul class={{chatList}}>
             {{#each data}}
@@ -12,7 +12,7 @@
                         <p class={{../chatSubtitle}}>{{subtitle}}</p>
                         <span class={{../chatDateTime}}>{{date}}</span>
                         {{#if new}}
-                            <span class={{../chatNewMessage}}>{{new}}</span>
+                            <span class={{../chatNewMessage}}>{{>dots new}}</span>
                         {{/if}}
                     </div>
                 </li>

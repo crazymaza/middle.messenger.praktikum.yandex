@@ -2,14 +2,29 @@ import chat from "./pages/chat";
 import login from "./pages/forms/login";
 import register from "./pages/forms/register";
 
-const pages = () => {
-//    return login();
-//    return register();
-   return chat();
+const getContent = () => {
+    const routes = [{
+            path: '/login',
+            component: login(),
+        },
+        {
+            path: '/registry',
+            component: register(),
+        },
+        {
+            path: '/chat-1',
+            component: chat(),
+        },
+        // { path: '/chat-2', component: ctat2(), },
+        // { path: '/profile', component: profile(), },
+    ];
+    const findedComponent = routes.filter(route => route.path === window.location.pathname)[0]?.component;
+    return findedComponent ?? '<div style="text-align: center; font-size: 20px; padding-top: 10%">Такой страницы не существует</div>';
 }
 
+
 const root = document.querySelector("#root");
-root.innerHTML = pages();
+root.innerHTML = getContent();
 
 // ==== Login form ====
 const inputs = document.querySelectorAll('.formInputs input');
