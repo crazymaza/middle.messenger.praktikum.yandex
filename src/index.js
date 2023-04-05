@@ -1,9 +1,11 @@
+import chat from "./pages/chat";
 import login from "./pages/forms/login";
 import register from "./pages/forms/register";
 
 const pages = () => {
 //    return login();
-   return register();
+//    return register();
+   return chat();
 }
 
 const root = document.querySelector("#root");
