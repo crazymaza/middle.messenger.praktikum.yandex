@@ -16,6 +16,13 @@ const chat = () => {
     chatNewMessage: classes.chat__new_message,
     chatRightSection: classes.chat__right_section,
     chatItemWrapper: classes.chat__item_wrapper,
+    data: [
+      {title: 'Andrey', subtitle: 'Message', date: 'Mon', new: 11},
+      {title: 'Sergey', subtitle: 'Message', date: 'Mon', new: 11},
+      {title: 'Pavel', subtitle: 'Message', date: 'Mon', new: 0},
+      {title: 'Anna', subtitle: 'Message', date: 'Mon', new: 11},
+      {title: 'Polina', subtitle: 'Message', date: 'Mon', new: 0},
+    ]
   };
 
   return chatTemplate(context);
