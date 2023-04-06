@@ -1,6 +1,7 @@
-import chat from "./pages/chat";
+import noChat from "./pages/chats/noChat";
 import login from "./pages/forms/login";
 import register from "./pages/forms/register";
+import withChat from "./pages/chats/withChat";
 
 const getContent = () => {
     const routes = [{
@@ -13,9 +14,9 @@ const getContent = () => {
         },
         {
             path: '/chat-1',
-            component: chat(),
+            component: noChat(),
         },
-        // { path: '/chat-2', component: ctat2(), },
+        { path: '/chat-2', component: withChat(), },
         // { path: '/profile', component: profile(), },
     ];
     const findedComponent = routes.filter(route => route.path === window.location.pathname)[0]?.component;

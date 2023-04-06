@@ -1,0 +1,51 @@
+<div class={{chatWrapper}}>
+    <section class={{chatLeftSection}}>
+        <a href="/profile" class={{profile}}>Профиль <span>></span></a>
+        <input type="text" class={{search}} placeholder="&#128269;&nbsp;Поиск">
+        <ul class={{../chatList}}>
+            {{#each data}}
+            <li class={{classes @index}}>
+                <div class={{../chatItemWrapper}}>
+                    <div class={{../chatAvatar}}>
+                    </div>
+                    <p class={{../chatTitle}}>{{title}}</p>
+                    <p class={{../chatSubtitle}}>{{subtitle}}</p>
+                    <span class={{../chatDateTime}}>{{date}}</span>
+                    {{#if new}}
+                    <span class={{../chatNewMessage}}>{{>dots new}}</span>
+                    {{/if}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+    <section class={{chatRightSection}}>
+        <section class={{chatWrapper}}>
+            <nav class={{chatNav}}>
+                <div class={{chatNavAvatar}}></div>
+                <span class={{chatNavName}}>Pavel</span>
+                <span class={{navDots}}>.</span>
+            </nav>
+            <section class={{chatInner}}>
+                <p class={{chatInnerDate}}></p>
+                <div class={{chatMessage}}>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, est eos ullam eligendi cum,
+                        facilis
+                        perferendis quam laboriosam esse, consectetur sint id vitae sit nam dolorem aut aperiam fugit
+                        quisquam.</p>
+                    <div class={{chatMessage}}>
+                        <img src="" alt="">
+                    </div>
+                    <div class={{chatMyMessage}}>
+                        <p>Lorem.</p>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <img src="" alt="" class="file">
+                <input type="text">
+                <button></button>
+            </footer>
+        </section>
+    </section>
+</div>

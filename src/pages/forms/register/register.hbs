@@ -2,35 +2,12 @@
     <form action="" class={{form}}>
         <p class={{formTitle}}>{{title}}</p>
         <div class="{{formInputs}} formInputs">
-            <label data-id="email">
-                <span class={{inputTitle}}>{{email}}</span>
-                <input type="email" name="email">
-            </label>
-            <label data-id="login">
-                <span class={{inputTitle}}>{{login}}</span>
-                <input type="text" name="login">
-            </label>
-            <label data-id="first_name">
-                <span class={{inputTitle}}>{{firstName}}</span>
-                <input type="text" name="first_name">
-            </label>
-            <label data-id="second_name">
-                <span class={{inputTitle}}>{{secondName}}</span>
-                <input type="text" name="second_name">
-            </label>
-            <label data-id="phone">
-                <span class={{inputTitle}}>{{phone}}</span>
-                <input type="text" name="phone">
-            </label>
-            <label data-id="password">
-                <span class={{inputTitle}}>{{password}}</span>
-                <input type="password" name="password">
-            </label>
-            <label data-id="password_confirm">
-                <span class={{inputTitle}}>{{passwordConfirm}}</span>
-                <input type="password" name="password_confirm">
-            </label>
-
+            {{#each inputs}}
+                <label data-id={{dataId}}>
+                    <span class={{../inputTitle}}>{{text}}</span>
+                    <input type={{type}} name={{dataId}}>
+                </label>
+            {{/each}}
         </div>
         <button type="submit" class={{formSubmit}}>
             {{submitButton}}
@@ -38,7 +15,3 @@
         <a href="/login" class={{formSameBtn}}>{{enterLink}}</a>
     </form>
 </div>
-
-<script>
-    
-</script>

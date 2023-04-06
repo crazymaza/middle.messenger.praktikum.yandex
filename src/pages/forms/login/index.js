@@ -4,8 +4,6 @@ import classes from "../forms.module.scss";
 const login = () => {
   const context = {
     title: "Вход",
-    login: "Логин",
-    password: "Пароль",
     submitButton: "Авторизоваться",
     registerLink: "Нет аккаунта?",
     formWrapper: classes.form__wrapper,
@@ -15,6 +13,10 @@ const login = () => {
     inputTitle: classes.input__title,
     formSubmit: classes.form__submit,
     formSameBtn: classes.form__same_btn,
+    inputs: [
+      {dataId: "login", text: "Логин", type: "text"},
+      {dataId: "password", text: "Пароль", type: "password"}
+    ]
   };
 
   return loginTemplate(context);

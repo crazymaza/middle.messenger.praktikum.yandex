@@ -1,3 +1,5 @@
+$navHeigth: 45px;
+
 * {
     padding: 0;
     margin: 0;
@@ -15,6 +17,7 @@ button {
 nav {
     display: flex;
     justify-content: center;
+    max-height: $navHeigth;
     padding: 10px 0;
     border-bottom: 1px solid gray;
 

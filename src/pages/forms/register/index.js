@@ -4,13 +4,6 @@ import classes from "../forms.module.scss";
 const register = () => {
   const context = {
     title: "Регистрация",
-    email: "Почта",
-    login: "Логин",
-    firstName: "Имя",
-    secondName: "Фамилия",
-    phone: "Телефон",
-    password: "Пароль",
-    passwordConfirm: "Пароль (ещё раз)",
     submitButton: "Зарегистрироваться",
     enterLink: "Войти",
     formWrapper: classes.form__wrapper,
@@ -20,6 +13,15 @@ const register = () => {
     inputTitle: classes.input__title,
     formSubmit: classes.form__submit,
     formSameBtn: classes.form__same_btn,
+    inputs: [
+      {dataId: "email", text: "Почта", type: "email"},
+      {dataId: "login", text: "Логин", type: "text"},
+      {dataId: "firstName", text: "Имя", type: "text"},
+      {dataId: "secondName", text: "Фамилия", type: "text"},
+      {dataId: "phone", text: "Телефон", type: "tel"},
+      {dataId: "password", text: "Пароль", type: "password"},
+      {dataId: "passwordConfirm", text: "Пароль (ещё раз)", type: "password"},
+    ]
   };
 
   return registerTemplate(context);
