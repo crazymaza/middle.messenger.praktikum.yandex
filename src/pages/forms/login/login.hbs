@@ -2,20 +2,9 @@
     <form action="" class={{form}}>
         <p class={{formTitle}}>{{title}}</p>
         <div class="{{formInputs}} formInputs">
-            {{#each inputs}}
-                <label data-id={{dataId}}>
-                    <span class={{../inputTitle}}>{{text}}</span>
-                    <input type={{type}} name={{dataId}}>
-                </label>
-            {{/each}}
+                {{{loginInputs}}}
         </div>
-        <button type="submit" class={{formSubmit}}>
-            {{submitButton}}
-        </button>
+        {{{button}}}
         <a href="/register.html" class={{formSameBtn}}>{{registerLink}}</a>
     </form>
 </div>
-
-<script>
-
-</script>

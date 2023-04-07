@@ -1,13 +1,5 @@
 @use '../../style.scss' as v;
 
-.form__wrapper {
-    width: 100%;
-    height: calc(100vh - v.$navHeigth);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .form {
     display: flex;
     flex-direction: column;
@@ -17,6 +9,15 @@
     min-height: 450px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
     border-radius: 12px;
+
+    &__wrapper {
+        width: 100%;
+        height: calc(100vh - v.$navHeigth);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
 
     &__title {
         font-size: 20px;
@@ -32,49 +33,6 @@
         flex-grow: 1;
         padding-bottom: 20px;
 
-        label {
-            position: relative;
-
-            &:focus-within {
-                .input__title {
-                    font-size: 9px;
-                    color: #999999;
-                    top: -5px;
-                }
-            }
-
-            .input__title {
-                position: absolute;
-                bottom: 5px;
-                left: 0;
-            }
-
-            input {
-                width: 280px;
-                border: none;
-                border-bottom: 1px solid #3369F3;
-                outline: none;
-                font-size: 13px;
-                line-height: 13px;
-                padding: 5px 5px 5px 0;
-            }
-        }
-    }
-
-    &__submit {
-        max-width: 280px;
-        padding: 12px 70px;
-        height: 37px;
-        background: #3369F3;
-        border-radius: 8px;
-        border: none;
-        color: white;
-        transition: 0.3s ease;
-        margin-bottom: 10px;
-
-        &:hover {
-            background: darken(#3369F3, 20%);
-        }
     }
 
     &__same_btn {

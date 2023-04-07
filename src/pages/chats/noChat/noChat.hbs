@@ -2,21 +2,8 @@
     <section class={{chatLeftSection}}>
         <a href="/profile" class={{profile}}>Профиль <span>></span></a>
         <input type="text" class={{search}} placeholder="&#128269;&nbsp;Поиск">
-        <ul class={{../chatList}}>
-            {{#each data}}
-                <li class={{../chatListItem}}>
-                    <div class={{../chatItemWrapper}}>
-                        <div class={{../chatAvatar}}>
-                        </div>
-                        <p class={{../chatTitle}}>{{title}}</p>
-                        <p class={{../chatSubtitle}}>{{subtitle}}</p>
-                        <span class={{../chatDateTime}}>{{date}}</span>
-                        {{#if new}}
-                            <span class={{../chatNewMessage}}>{{>dots new}}</span>
-                        {{/if}}
-                    </div>
-                </li>
-            {{/each}}
+        <ul>
+            {{{listItems}}}
         </ul>
     </section>
     <section class={{chatRightSection}}>

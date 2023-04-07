@@ -1,0 +1,85 @@
+.chat {
+    &__list {
+        &_item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                background-color: lighten(#E4EDFD, 2%);
+            }
+
+            &:first-child {
+                .chat__item_wrapper {
+                    border-top: 1px solid darken(#EFEFEF, 5%);
+                }
+            }
+
+            &_active {
+                background-color: #E4EDFD;
+            }
+        }
+    }
+
+    &__item_wrapper {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: minmax(47px, 60px) 2fr 1fr;
+        grid-template-areas:
+            "avatar title dateTime"
+            "avatar subtitle newMessage";
+        align-items: center;
+        border-bottom: 1px solid darken(#EFEFEF, 5%);
+        padding-top: 12px;
+        padding-bottom: 12px;
+        margin: 0 10px;
+
+        .chat {
+            &__avatar {
+                grid-area: avatar;
+                width: 47px;
+                height: 47px;
+                border-radius: 50%;
+                background-color: #EFEFEF;
+                margin-right: 10px;
+            }
+
+            &__title {
+                grid-area: title;
+                font-size: 13px;
+                line-height: 13px;
+                color: #1E1E1E;
+            }
+
+            &__subtitle {
+                grid-area: subtitle;
+                align-self: self-start;
+                font-size: 12px;
+                line-height: 15px;
+                color: #999999;
+            }
+
+            &__date_time {
+                grid-area: dateTime;
+                justify-self: end;
+                align-self: start;
+                font-size: 9px;
+                line-height: 13px;
+                color: #999999;
+            }
+
+            &__new_message {
+                grid-area: newMessage;
+                justify-self: end;
+                font-size: 11px;
+                line-height: 12px;
+                text-align: center;
+                min-width: 12px;
+                min-height: 12px;
+                padding: 5px;
+                border-radius: 50%;
+                background-color: #3369F3;
+                color: white;
+            }
+        }
+    }
+}

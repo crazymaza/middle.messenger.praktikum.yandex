@@ -1,0 +1,27 @@
+label {
+    position: relative;
+
+    &:focus-within {
+        .input__title {
+            font-size: 9px;
+            color: #999999;
+            top: -5px;
+        }
+    }
+
+    .input__title {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+    }
+
+    input {
+        width: 280px;
+        border: none;
+        border-bottom: 1px solid #3369F3;
+        outline: none;
+        font-size: 13px;
+        line-height: 13px;
+        padding: 5px 5px 5px 0;
+    }
+}

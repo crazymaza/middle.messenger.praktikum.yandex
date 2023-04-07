@@ -1,0 +1,17 @@
+.form {
+    &__submit {
+        max-width: 280px;
+        padding: 12px 70px;
+        height: 37px;
+        background: #3369F3;
+        border-radius: 8px;
+        border: none;
+        color: white;
+        transition: 0.3s ease;
+        margin-bottom: 10px;
+
+        &:hover {
+            background: darken(#3369F3, 20%);
+        }
+    }
+}
