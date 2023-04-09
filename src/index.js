@@ -18,6 +18,8 @@ import message from "./components/message";
 import profile from "./pages/profile";
 import profileField from "./components/profileField";
 import profileInput from "./components/profileInput";
+import error404 from "./pages/errors/404";
+import error500 from "./pages/errors/500";
 
 const listItemsData = [
     {title: "Andrey", subtitle: "Message", date: "Mon", newMessage: 11},
@@ -64,16 +66,16 @@ const profileFields = {
         {title: "Выйти", value: "", link: true, href: "/login"},
     ],
     changeData: [
-        {title: "Почта", value: "pochta@yandex.ru", type: "email"},
-        {title: "Логин", value: "ivanivanov", type: "text"},
-        {title: "Имя", value: "Иван", type: "text"},
-        {title: "Фамилия", value: "Иванов", type: "text"},
-        {title: "Имя в чате", value: "Иван", type: "text"},
-        {title: "Телефон", value: "+7(909)967-3030", type: "tel"},
+        {title: "Почта", value: "pochta@yandex.ru", type: "email", name: "email"},
+        {title: "Логин", value: "ivanivanov", type: "text", name: "login"},
+        {title: "Имя", value: "Иван", type: "text", name: "first_name"},
+        {title: "Фамилия", value: "Иванов", type: "text", name: "second_name"},
+        {title: "Имя в чате", value: "Иван", type: "text", name: "display_name"},
+        {title: "Телефон", value: "+7(909)967-3030", type: "tel", name: "phone"},
     ],
     changePassword: [
-        {title: "Старый пароль", value: "ivanivanov", type: "password"},
-        {title: "Новый пароль", value: "ivanivanov", type: "password"},
+        {title: "Старый пароль", value: "ivanivanov", type: "password", name: "oldPassword"},
+        {title: "Новый пароль", value: "ivanivanov", type: "password", name: "newPassword"},
         {title: "Повторите пароль", value: "ivanivanov", type: "password"},
     ]
 }
@@ -148,10 +150,18 @@ const getContent = () => {
                 fields2: button({text: "Сохранить"})
             })
         },
+        {
+            path: "/404",
+            component: error404(),
+        },
+        {
+            path: "/500",
+            component: error500(),
+        },
 
     ];
     const findedComponent = routes.filter(route => route.path === window.location.pathname)[0]?.component;
-    return findedComponent ?? "<div style='text-align: center; font-size: 20px; padding-top: 10%'>Такой страницы не существует</div>";
+    return findedComponent ?? error404();
 }
 
 
