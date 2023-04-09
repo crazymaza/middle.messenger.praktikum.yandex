@@ -1,3 +1,7 @@
-<button type="submit" class={{formSubmit}}>
-    {{text}}
+<button type="submit" class={{button}}>
+    {{#if hasSymbol}}
+        {{{text}}}
+    {{else}}
+        {{text}}
+    {{/if}}
 </button>

@@ -1,0 +1,14 @@
+.chat {
+    &__right_section {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            font-size: 12px;
+            line-height: 12px;
+            color: #999999;
+        }
+    }
+}

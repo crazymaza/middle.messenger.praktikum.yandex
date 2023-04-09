@@ -1,0 +1,8 @@
+@use '../../../../style.scss'as v;
+
+.chat__wrapper {
+    width: 100%;
+    height: calc(100vh - v.$navHeigth);
+    display: flex;
+    justify-content: space-between;
+}

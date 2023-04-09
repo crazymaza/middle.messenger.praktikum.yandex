@@ -1,6 +1,6 @@
 {{#each listItems}}
     <li class={{../chatListItem}}>
-        <div class={{../chatItemWrapper}}>
+        <div class={{../chatItemWrapper}} {{#if active}}{{../activeItem}}{{/if}}>
             <div class={{../chatAvatar}}>
             </div>
             <p class={{../chatTitle}}>{{title}}</p>

@@ -16,6 +16,7 @@ const chatListItem = ({listItems}) => {
         chatDateTime: classes.chat__date_time,
         chatNewMessage: classes.chat__new_message,
         chatItemWrapper: classes.chat__item_wrapper,
+        activeItem: classes.chat__list_item_active,
         listItems
     }
     return chatListItemTemplate(context);
