@@ -1,45 +1,17 @@
-<section>
-    <div class="avatar"></div>
-    <p class="name"></p>
-    <div class="fields">
-        <ul>
-            <li>
-                <span class="title"></span>
-                <span class="value"></span>
-            </li>
-            <li>
-                <span class="title"></span>
-                <span class="value"></span>
-            </li>
-            <li>
-                <span class="title"></span>
-                <span class="value"></span>
-            </li>
-            <li>
-                <span class="title"></span>
-                <span class="value"></span>
-            </li>
-            <li>
-                <span class="title"></span>
-                <span class="value"></span>
-            </li>
-            <li>
-                <span class="title"></span>
-                <span class="value"></span>
-            </li>
-        </ul>
+<section class={{profileWrapper}}>
+    <div class={{profileTop}}>
+        <div class={{profileAvatar}}>
+            <img src={{avatarTmp}} alt="Avatar">
+        </div>
+        <p class={{avatarName}}>Иван</p>
     </div>
-    <div class="change">
-        <ul>
-            <li>
-                <span></span>
-            </li>
-            <li>
-                <span></span>
-            </li>
-            <li>
-                <span class="exit"></span>
-            </li>
-        </ul>
+    <div class={{profileFields}}>
+            {{{fields1}}}
+    </div>
+    <div class={{profileChange}}>
+            {{{fields2}}}
+    </div>
+    <div class={{back}}>
+        {{{button}}}
     </div>
 </section>

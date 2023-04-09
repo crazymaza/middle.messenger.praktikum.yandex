@@ -1,0 +1,29 @@
+.field__wrapper {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    border-bottom: 1px solid #EAEAEA;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+
+    label {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .fields {
+            &__title {
+                font-size: 13px;
+                line-height: 13px;
+            }
+
+            &__value {
+                font-size: 13px;
+                line-height: 13px;
+                text-align: right;
+                color: #999999;
+                border: none;
+            }
+        }
+    }
+}

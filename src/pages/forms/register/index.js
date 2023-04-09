@@ -1,5 +1,5 @@
 import registerTemplate from "./register.hbs";
-import classes from "../forms.module.scss";
+import * as classes from "../forms.module.scss";
 
 const register = ({button, registerInputs}) => {
   const context = {

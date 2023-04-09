@@ -1,5 +1,5 @@
 import chatFooterTemplate from "./chatFooter.hbs";
-import classes from "./chatFooter.module.scss";
+import * as classes from "./chatFooter.module.scss";
 
 const chatFooter = ({button1, button2}) => {
   const context = {

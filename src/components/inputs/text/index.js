@@ -1,5 +1,5 @@
 import inputTemplate from './input.hbs';
-import classes from './input.module.scss';
+import * as classes from './input.module.scss';
 
 const input = ({inputs}) => {
     const context = {

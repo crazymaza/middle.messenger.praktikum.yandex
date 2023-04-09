@@ -1,5 +1,5 @@
 import rightSectionTemplate from "./rightSection.hbs";
-import classes from "./rightSection.module.scss";
+import * as classes from "./rightSection.module.scss";
 
 const NO_CHAT_TEXT = "<h1>Выберите чат чтобы отправить сообщение</h1>";
 

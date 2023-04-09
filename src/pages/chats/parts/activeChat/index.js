@@ -1,5 +1,5 @@
 import activeChatTemplate from "./activeChat.hbs";
-import classes from "./activeChat.module.scss";
+import * as classes from "./activeChat.module.scss";
 
 const activeChat = ({header, footer, date = "", messages = []}) => {
   const context = {

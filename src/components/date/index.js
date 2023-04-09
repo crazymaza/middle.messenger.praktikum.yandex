@@ -1,5 +1,5 @@
 import dateTemplate from "./date.hbs";
-import classes from "./date.module.scss";
+import * as classes from "./date.module.scss";
 
 const date = ({value}) => {
   const context = {

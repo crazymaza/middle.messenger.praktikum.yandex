@@ -1,5 +1,5 @@
 import loginTemplate from "./login.hbs";
-import classes from "../forms.module.scss";
+import * as classes from "../forms.module.scss";
 
 const login = ({button, loginInputs}) => {
   const context = {

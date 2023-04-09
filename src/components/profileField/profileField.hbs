@@ -1,0 +1,13 @@
+<ul>
+    {{#each fields}}
+        <li class={{../fieldWrapper}}>
+            {{#if link}}
+                <a href={{href}} class={{../fieldsTitle}}>{{title}}</a>
+            {{/if}}
+            {{#unless link}}
+                <span class={{../fieldsTitle}}>{{title}}</span>
+                <span class={{../fieldsValue}}>{{value}}</span>
+            {{/unless}}
+        </li>
+    {{/each}}
+</ul>

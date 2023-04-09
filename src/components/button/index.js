@@ -1,5 +1,5 @@
 import buttonTemplate from './button.hbs';
-import classes from './button.module.scss';
+import * as classes from './button.module.scss';
 
 const button = ({text, hasSymbol}) => {
     const context = {

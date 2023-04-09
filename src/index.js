@@ -15,6 +15,9 @@ import rightSection from "./pages/chats/parts/rightSection";
 import activeChat from "./pages/chats/parts/activeChat";
 import date from "./components/date";
 import message from "./components/message";
+import profile from "./pages/profile";
+import profileField from "./components/profileField";
+import profileInput from "./components/profileInput";
 
 const listItemsData = [
     {title: "Andrey", subtitle: "Message", date: "Mon", newMessage: 11},
@@ -30,7 +33,7 @@ const loginInputs = [
     {dataId: "password", text: "Пароль", type: "password"}
   ]
 
-  const registerInputs = [
+const registerInputs = [
     {dataId: "email", text: "Почта", type: "email"},
     {dataId: "login", text: "Логин", type: "text"},
     {dataId: "firstName", text: "Имя", type: "text"},
@@ -38,13 +41,42 @@ const loginInputs = [
     {dataId: "phone", text: "Телефон", type: "tel"},
     {dataId: "password", text: "Пароль", type: "password"},
     {dataId: "passwordConfirm", text: "Пароль (ещё раз)", type: "password"},
-  ]
+]
 
-  const messages = [
+const messages = [
     {message: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро."},
     {isImg: true, img: camera, imgAlt: "Camera"},
-    {isMine: true, message: "Круто"}
-  ]
+    {isMine: true, message: "Круто!"}
+]
+
+const profileFields = {
+    first: [
+        {title: "Почта", value: "pochta@yandex.ru"},
+        {title: "Логин", value: "ivanivanov"},
+        {title: "Имя", value: "Иван"},
+        {title: "Фамилия", value: "Иванов"},
+        {title: "Имя в чате", value: "Иван"},
+        {title: "Телефон", value: "+7 (909) 967 30 30"},
+    ],
+    second: [
+        {title: "Изменить данные", value: "", link: true, href: "/changeData"},
+        {title: "Изменить пароль", value: "", link: true, href: "/changePassword",},
+        {title: "Выйти", value: "", link: true, href: "/login"},
+    ],
+    changeData: [
+        {title: "Почта", value: "pochta@yandex.ru", type: "email"},
+        {title: "Логин", value: "ivanivanov", type: "text"},
+        {title: "Имя", value: "Иван", type: "text"},
+        {title: "Фамилия", value: "Иванов", type: "text"},
+        {title: "Имя в чате", value: "Иван", type: "text"},
+        {title: "Телефон", value: "+7(909)967-3030", type: "tel"},
+    ],
+    changePassword: [
+        {title: "Старый пароль", value: "ivanivanov", type: "password"},
+        {title: "Новый пароль", value: "ivanivanov", type: "password"},
+        {title: "Повторите пароль", value: "ivanivanov", type: "password"},
+    ]
+}
 
 const getContent = () => {
     const messagesArr = messages.map(item => message(item));
@@ -92,7 +124,31 @@ const getContent = () => {
                 })
             }),
         },
-        // { path: "/profile", component: profile(), },
+        {
+            path: "/profile",
+            component: profile({
+                button: button({text: "&larr;", hasSymbol: true}),
+                fields1: profileField({fields: profileFields.first}),
+                fields2: profileField({fields: profileFields.second}),
+            })
+        },
+        {
+            path: "/changeData",
+            component: profile({
+                button: button({text: "&larr;", hasSymbol: true}),
+                fields1: profileInput({fields: profileFields.changeData}),
+                fields2: button({text: "Сохранить"})
+            })
+        },
+        {
+            path: "/changePassword",
+            component: profile({
+                button: button({text: "&larr;", hasSymbol: true}),
+                fields1: profileInput({fields: profileFields.changePassword}),
+                fields2: button({text: "Сохранить"})
+            })
+        },
+
     ];
     const findedComponent = routes.filter(route => route.path === window.location.pathname)[0]?.component;
     return findedComponent ?? "<div style='text-align: center; font-size: 20px; padding-top: 10%'>Такой страницы не существует</div>";

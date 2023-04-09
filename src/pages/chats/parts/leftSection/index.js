@@ -1,12 +1,11 @@
 import leftSectionTemplate from "./leftSection.hbs";
-import classes from "./leftSection.module.scss";
+import * as classes from "./leftSection.module.scss";
 
 const leftSection = ({items}) => {
   const context = {
     chatLeftSection: classes.chat__left_section,
     profile: classes.profile,
     search: classes.search,
-    footerForm: classes.footer__form,
     items,
   };
 

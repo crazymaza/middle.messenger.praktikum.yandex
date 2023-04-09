@@ -1,5 +1,5 @@
 import messageTemplate from "./message.hbs";
-import classes from "./message.module.scss";
+import * as classes from "./message.module.scss";
 
 const message = ({isMine = false, message = "", isImg = false, img = "", imgAlt = ""}) => {
   const context = {

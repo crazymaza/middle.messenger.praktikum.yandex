@@ -1,6 +1,6 @@
 import chatListItemTemplate from './chatListItem.hbs';
 import Handlebars from 'handlebars';
-import classes from './chatListItem.module.scss';
+import * as classes from './chatListItem.module.scss';
 
 Handlebars.registerPartial('dots', (value) => {
     const stringText = String(value);

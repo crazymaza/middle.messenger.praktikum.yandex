@@ -1,5 +1,5 @@
 import chatHeaderTemplate from "./chatHeader.hbs";
-import classes from "./chatHeader.module.scss";
+import * as classes from "./chatHeader.module.scss";
 
 const chatHeader = ({name}) => {
   const context = {

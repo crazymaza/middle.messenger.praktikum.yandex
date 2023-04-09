@@ -1,5 +1,5 @@
 import wrapperTemplate from "./wrapper.hbs";
-import classes from "./wrapper.module.scss";
+import * as classes from "./wrapper.module.scss";
 
 const wrapper = ({sections}) => {
   const context = {
