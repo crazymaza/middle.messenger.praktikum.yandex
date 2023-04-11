@@ -19,8 +19,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #FBFBFB;
-            border-right: 1px solid #EAEAEA;
+            background-color: v.$backLight;
+            border-right: 1px solid v.$background;
             ;
 
             button {
@@ -45,7 +45,7 @@
         width: 130px;
         height: 130px;
         align-items: center;
-        background-color: #EFEFEF;
+        background-color: v.$background;
         border-radius: 50%;
         cursor: pointer;
 
@@ -74,7 +74,7 @@
 
         li {
             list-style: none;
-            border-bottom: 1px solid #EAEAEA;
+            border-bottom: 1px solid v.$background;
             padding-bottom: 10px;
             margin-bottom: 10px;
 
@@ -83,7 +83,7 @@
 
                 span,
                 a {
-                    color: #FF0000;
+                    color: v.$danger;
                 }
             }
 
@@ -91,7 +91,7 @@
             a {
                 font-size: 13px;
                 line-height: 13px;
-                color: #3369F3;
+                color: v.$primary;
             }
         }
 

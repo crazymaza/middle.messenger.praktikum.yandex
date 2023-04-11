@@ -1,15 +1,17 @@
+@use "../../../../style.scss" as v;
+
 footer {
     .footer__form {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: 1px solid #EAEAEA;
+        border-top: 1px solid v.$background;
         padding: 11px 0;
         gap: 10px;
 
         input {
             width: 100%;
-            background: #EFEFEF;
+            background: v.$background;
             border-radius: 30px;
             padding: 20px 10px;
             font-size: 12px;
