@@ -1,8 +1,10 @@
+@use "../../style.scss" as v;
+
 .chat__inner_date {
     font-size: 12px;
     line-height: 12px;
     text-align: center;
-    color: #999999;
+    color: v.$helper;
     align-self: center;
     margin-bottom: 30px;
 }

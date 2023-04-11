@@ -1,3 +1,5 @@
+@use "../../style.scss" as v;
+
 .chat {
     &__list {
         &_item {
@@ -5,17 +7,17 @@
             cursor: pointer;
 
             &:hover {
-                background-color: lighten(#E4EDFD, 2%);
+                background-color: lighten(v.$background, 2%);
             }
 
             &:first-child {
                 .chat__item_wrapper {
-                    border-top: 1px solid darken(#EFEFEF, 5%);
+                    border-top: 1px solid darken(v.$background, 5%);
                 }
             }
 
             &_active {
-                background-color: #E4EDFD;
+                background-color: v.$background;
             }
         }
     }
@@ -28,7 +30,7 @@
             "avatar title dateTime"
             "avatar subtitle newMessage";
         align-items: center;
-        border-bottom: 1px solid darken(#EFEFEF, 5%);
+        border-bottom: 1px solid darken(v.$background, 5%);
         padding-top: 12px;
         padding-bottom: 12px;
         margin: 0 10px;
@@ -39,7 +41,7 @@
                 width: 47px;
                 height: 47px;
                 border-radius: 50%;
-                background-color: #EFEFEF;
+                background-color: v.$background;
                 margin-right: 10px;
             }
 
@@ -47,7 +49,7 @@
                 grid-area: title;
                 font-size: 13px;
                 line-height: 13px;
-                color: #1E1E1E;
+                color: v.$chatTitle;
             }
 
             &__subtitle {
@@ -55,7 +57,7 @@
                 align-self: self-start;
                 font-size: 12px;
                 line-height: 15px;
-                color: #999999;
+                color: v.$helper;
             }
 
             &__date_time {
@@ -64,7 +66,7 @@
                 align-self: start;
                 font-size: 9px;
                 line-height: 13px;
-                color: #999999;
+                color: v.$helper;
             }
 
             &__new_message {
@@ -77,8 +79,8 @@
                 min-height: 12px;
                 padding: 5px;
                 border-radius: 50%;
-                background-color: #3369F3;
-                color: white;
+                background-color: v.$primary;
+                color: v.$buttonText;
             }
         }
     }

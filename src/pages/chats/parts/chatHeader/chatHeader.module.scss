@@ -1,14 +1,16 @@
+@use "../../../../style.scss" as v;
+
 .chat__nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-color: #EAEAEA;
+    border-color: v.$background;
 
     .nav {
         &__avatar {
             width: 34px;
             height: 34px;
-            background: #EFEFEF;
+            background: v.$background;
             margin-right: 8px;
             border-radius: 50%;
         }

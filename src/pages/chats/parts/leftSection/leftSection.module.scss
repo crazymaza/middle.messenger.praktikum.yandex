@@ -1,20 +1,22 @@
+@use "../../../../style.scss" as v;
+
 .chat__left_section {
     display: flex;
     flex-direction: column;
     gap: 18px;
     padding-top: 20px;
-    background: #FBFBFB;
+    background: v.$backLight;
 }
 
 .profile {
     font-size: 12px;
     line-height: 14px;
-    color: #999999;
+    color: v.$helper;
     text-align: right;
     transition: all 0.3s ease;
 
     &:hover {
-        color: darken(#999999, 10%)
+        color: darken(v.$helper, 10%)
     }
 
     span {
@@ -27,7 +29,7 @@
 .search {
     width: 290px;
     height: 32px;
-    background: #EFEFEF;
+    background: v.$background;
     border-radius: 5px;
     border: none;
     padding-left: 10px;
