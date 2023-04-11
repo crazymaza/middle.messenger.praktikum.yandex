@@ -161,7 +161,7 @@ const getContent = () => {
 
     ];
     const findedComponent = routes.filter(route => route.path === window.location.pathname)[0]?.component;
-    return findedComponent() ?? error404();
+    return findedComponent ?? error404();
 }
 
 
