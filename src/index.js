@@ -31,18 +31,18 @@ const listItemsData = [
   ]
 
 const loginInputs = [
-    {dataId: "login", text: "Логин", type: "text"},
-    {dataId: "password", text: "Пароль", type: "password"}
+    {name: "login", text: "Логин", type: "text"},
+    {name: "password", text: "Пароль", type: "password"}
   ]
 
 const registerInputs = [
-    {dataId: "email", text: "Почта", type: "email"},
-    {dataId: "login", text: "Логин", type: "text"},
-    {dataId: "firstName", text: "Имя", type: "text"},
-    {dataId: "secondName", text: "Фамилия", type: "text"},
-    {dataId: "phone", text: "Телефон", type: "tel"},
-    {dataId: "password", text: "Пароль", type: "password"},
-    {dataId: "passwordConfirm", text: "Пароль (ещё раз)", type: "password"},
+    {name: "email", text: "Почта", type: "email"},
+    {name: "login", text: "Логин", type: "text"},
+    {name: "first_name", text: "Имя", type: "text"},
+    {name: "second_name", text: "Фамилия", type: "text"},
+    {name: "phone", text: "Телефон", type: "tel"},
+    {name: "password", text: "Пароль", type: "password"},
+    {name: "passwordConfirm", text: "Пароль (ещё раз)", type: "password"},
 ]
 
 const messages = [
@@ -129,7 +129,7 @@ const getContent = () => {
         {
             path: "/profile",
             component: profile({
-                button: button({text: "&larr;", hasSymbol: true}),
+                button: button({text: "&larr;", hasSymbol: true, type: "button"}),
                 fields1: profileField({fields: profileFields.first}),
                 fields2: profileField({fields: profileFields.second}),
             })
@@ -137,7 +137,7 @@ const getContent = () => {
         {
             path: "/changeData",
             component: profile({
-                button: button({text: "&larr;", hasSymbol: true}),
+                button: button({text: "&larr;", hasSymbol: true, type: "button"}),
                 fields1: profileInput({fields: profileFields.changeData}),
                 fields2: button({text: "Сохранить"})
             })
@@ -145,7 +145,7 @@ const getContent = () => {
         {
             path: "/changePassword",
             component: profile({
-                button: button({text: "&larr;", hasSymbol: true}),
+                button: button({text: "&larr;", hasSymbol: true, type: "button"}),
                 fields1: profileInput({fields: profileFields.changePassword}),
                 fields2: button({text: "Сохранить"})
             })
