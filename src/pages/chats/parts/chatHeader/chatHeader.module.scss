@@ -1,0 +1,47 @@
+@use "../../../../style.scss" as v;
+
+.chat__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-color: v.$background;
+
+    .nav {
+        &__avatar {
+            width: 34px;
+            height: 34px;
+            background: v.$background;
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+
+        &__name {
+            flex-grow: 1;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 13px;
+        }
+
+        &__dots {
+            text-align: right;
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+
+            &::before,
+            &::after {
+                content: ".";
+                position: absolute;
+            }
+
+            &::before {
+                top: -5px;
+            }
+
+            &::after {
+                right: 0;
+                bottom: -5px;
+            }
+        }
+    }
+}

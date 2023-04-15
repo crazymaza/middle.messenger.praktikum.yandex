@@ -1,0 +1,29 @@
+@use "../../../style.scss" as v;
+
+label {
+    position: relative;
+
+    &:focus-within {
+        .input__title {
+            font-size: 9px;
+            color: v.$helper;
+            top: -5px;
+        }
+    }
+
+    .input__title {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+    }
+
+    input {
+        width: 280px;
+        border: none;
+        border-bottom: 1px solid v.$primary;
+        outline: none;
+        font-size: 13px;
+        line-height: 13px;
+        padding: 5px 5px 5px 0;
+    }
+}

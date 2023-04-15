@@ -1,0 +1,17 @@
+@use "../../style.scss" as v;
+
+.button {
+    max-width: 280px;
+    padding: 12px 70px;
+    height: 37px;
+    background: v.$primary;
+    border-radius: 8px;
+    border: none;
+    color: v.$buttonText;
+    transition: 0.3s ease;
+    margin-bottom: 10px;
+
+    &:hover {
+        background: darken(v.$primary, 20%);
+    }
+}

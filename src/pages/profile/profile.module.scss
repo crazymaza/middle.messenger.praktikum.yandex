@@ -1,0 +1,103 @@
+@use "../../style.scss"as v;
+
+.profile {
+    &__wrapper {
+        height: calc(100vh - v.$navHeigth);
+        padding-top: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+        position: relative;
+
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 64px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: v.$backLight;
+            border-right: 1px solid v.$background;
+            ;
+
+            button {
+                border-radius: 50%;
+                font-size: 18px;
+                padding: 5px;
+                height: auto;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__top {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    &__avatar {
+        position: relative;
+        width: 130px;
+        height: 130px;
+        align-items: center;
+        background-color: v.$background;
+        border-radius: 50%;
+        cursor: pointer;
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        &_name {
+            font-size: 16px;
+            line-height: 16px;
+        }
+    }
+
+    &__fields {
+        width: 510px;
+    }
+
+    &__change {
+        width: 510px;
+        margin-top: 40px;
+
+        li {
+            list-style: none;
+            border-bottom: 1px solid v.$background;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+
+            &:last-child {
+                border-bottom: none;
+
+                span,
+                a {
+                    color: v.$danger;
+                }
+            }
+
+            span,
+            a {
+                font-size: 13px;
+                line-height: 13px;
+                color: v.$primary;
+            }
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}

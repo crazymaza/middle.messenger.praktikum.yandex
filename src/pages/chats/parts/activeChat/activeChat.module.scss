@@ -1,0 +1,22 @@
+@use "../../../../style.scss"as v;
+
+.chat {
+    &__wrapper {
+        height: calc(100vh - v.$navHeigth - 20px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        padding: 20px;
+
+        .chat {
+            &__inner {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-end;
+                height: 100%;
+            }
+        }
+    }
+}

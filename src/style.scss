@@ -1,0 +1,63 @@
+$navHeigth: 45px;
+$primary: #3369F3;
+$danger: #FF0000; 
+$background: #EFEFEF;
+$backLight: #FBFBFB;
+$helper: #999999;
+$buttonText: white;
+$chatTitle: #1E1E1E;
+$messageBackground: #F8F8F8;
+$myMessage: #E4EDFD;
+
+
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    max-height: $navHeigth;
+    padding: 10px 0;
+    border-bottom: 1px solid gray;
+
+    ul {
+        display: flex;
+        gap: 20px;
+
+        li {
+            list-style: none;
+
+            a {
+                padding: 5px;
+                border: 1px solid gray;
+                border-radius: 5px;
+                transition: all 0.3 ease;
+
+                &:hover {
+                    background-color: gray;
+                    color: white
+                }
+            }
+        }
+    }
+}
+
+.active {
+    span {
+        font-size: 9px;
+        color: #999999;
+        top: -5px;
+    }
+}
