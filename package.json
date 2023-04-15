@@ -15,7 +15,8 @@
     "@parcel/transformer-sass": "^2.8.3",
     "express": "^4.18.2",
     "parcel": "^2.8.3",
-    "parcel-transformer-hbs": "^1.0.4"
+    "parcel-transformer-hbs": "^1.0.4",
+    "typescript": "^5.0.4"
   },
   "engines": {
     "node": ">12.0.0"

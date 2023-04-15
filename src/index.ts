@@ -64,7 +64,7 @@ const profileFields: ProfileType = {
     second: [
         { title: "Изменить данные", value: "", link: true, href: "/changeData" },
         { title: "Изменить пароль", value: "", link: true, href: "/changePassword", },
-        { title: "Выйти", value: "", link: true, href: "/login"},
+        { title: "Выйти", value: "", link: true, href: "/login" },
     ],
     changeData: [
         { title: "Почта", value: "pochta@yandex.ru", type: "email", name: "email" },
@@ -169,8 +169,10 @@ const getContent = (): string => {
 }
 
 
-const root: HTMLDivElement = document.querySelector("#root");
-root.innerHTML = getContent();
+const root: HTMLDivElement | null = document.querySelector("#root");
+if (root) {
+    root.innerHTML = getContent();
+}
 
 // ==== Login form ====
 const inputs: NodeListOf<Element> = document.querySelectorAll(".formInputs input");
@@ -179,10 +181,10 @@ const labels: NodeListOf<Element> = document.querySelectorAll(".formInputs label
 inputs.forEach((input: HTMLInputElement) =>
     input.addEventListener("change", () => {
         labels.forEach((label: HTMLLabelElement) => {
-            if (input.value && label.attributes["data-id"].value === input.name) {
+            if (input.value && label.attributes.getNamedItem("data-id")?.value === input.name) {
                 label.classList.add("active");
             }
-            if (!input.value && label.attributes["data-id"].value === input.name) {
+            if (!input.value && label.attributes.getNamedItem("data-id")?.value === input.name) {
                 label.classList.remove("active")
             }
         })
