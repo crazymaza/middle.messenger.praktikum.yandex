@@ -1,7 +1,11 @@
 import leftSectionTemplate from "./leftSection.hbs";
 import * as classes from "./leftSection.module.scss";
 
-const leftSection = ({items}) => {
+interface LeftSectionInterface {
+  items: string
+}
+
+const leftSection = ({ items }: LeftSectionInterface): string => {
   const context = {
     chatLeftSection: classes.chat__left_section,
     profile: classes.profile,

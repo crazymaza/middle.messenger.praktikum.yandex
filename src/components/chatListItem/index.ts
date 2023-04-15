@@ -1,13 +1,18 @@
 import chatListItemTemplate from './chatListItem.hbs';
 import Handlebars from 'handlebars';
 import * as classes from './chatListItem.module.scss';
+import { ItemDataInterface } from '../../types/interfaces';
+
+interface ChatListItemInterface {
+    listItems: Array<ItemDataInterface>
+}
 
 Handlebars.registerPartial('dots', (value) => {
     const stringText = String(value);
-    return stringText.length > 2 ? `${stringText.slice(0,2)}..` : value;
+    return stringText.length > 2 ? `${stringText.slice(0, 2)}..` : value;
 });
 
-const chatListItem = ({listItems}) => {
+const chatListItem = ({ listItems }: ChatListItemInterface): string => {
     const context = {
         chatListItem: classes.chat__list_item,
         chatAvatar: classes.chat__avatar,

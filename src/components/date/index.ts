@@ -1,7 +1,11 @@
 import dateTemplate from "./date.hbs";
 import * as classes from "./date.module.scss";
 
-const date = ({value}) => {
+interface DateInterface {
+  value: string
+}
+
+const date = ({ value }: DateInterface): string => {
   const context = {
     chatInnerDate: classes.chat__inner_date,
     value,

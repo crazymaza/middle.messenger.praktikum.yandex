@@ -1,7 +1,8 @@
 import registerTemplate from "./register.hbs";
 import * as classes from "../forms.module.scss";
+import { FormsInterface } from "../forms";
 
-const register = ({button, registerInputs}) => {
+const register = ({button, inputs}: FormsInterface): string => {
   const context = {
     title: "Регистрация",
     enterLink: "Войти",
@@ -11,7 +12,7 @@ const register = ({button, registerInputs}) => {
     formInputs: classes.form__inputs,
     formSameBtn: classes.form__same_btn,
     button, 
-    registerInputs
+    inputs
   };
 
   return registerTemplate(context);

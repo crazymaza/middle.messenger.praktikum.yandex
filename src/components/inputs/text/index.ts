@@ -1,7 +1,12 @@
+import { AuthInterface } from '../../../types/interfaces';
 import inputTemplate from './input.hbs';
 import * as classes from './input.module.scss';
 
-const input = ({inputs}) => {
+interface InputTextInterface {
+    inputs: Array<AuthInterface>
+}
+
+const input = ({inputs}: InputTextInterface): string => {
     const context = {
         inputTitle: classes.input__title,
         inputs

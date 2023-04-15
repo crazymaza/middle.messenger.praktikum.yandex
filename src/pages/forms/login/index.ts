@@ -1,7 +1,8 @@
 import loginTemplate from "./login.hbs";
 import * as classes from "../forms.module.scss";
+import { FormsInterface } from "../forms";
 
-const login = ({button, loginInputs}) => {
+const login = ({button, inputs}: FormsInterface): string => {
   const context = {
     title: "Вход",
     registerLink: "Нет аккаунта?",
@@ -11,7 +12,7 @@ const login = ({button, loginInputs}) => {
     formTitle: classes.form__title,
     formSameBtn: classes.form__same_btn,
     button,
-    loginInputs
+    inputs
   };
 
   return loginTemplate(context);

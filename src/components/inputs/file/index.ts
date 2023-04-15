@@ -1,7 +1,12 @@
 import inputFileTemplate from "./input.hbs";
 import * as classes from "./input.module.scss";
 
-const inputFile = ({value, isImg=true}) => {
+interface InputFileInterface {
+    value: string,
+    isImg?: boolean
+}
+
+const inputFile = ({value, isImg=true}: InputFileInterface): string => {
     const context = {
         labelClass: classes.label,
         value,

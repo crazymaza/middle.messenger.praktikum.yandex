@@ -1,7 +1,14 @@
 import activeChatTemplate from "./activeChat.hbs";
 import * as classes from "./activeChat.module.scss";
 
-const activeChat = ({header, footer, date = "", messages = []}) => {
+interface ActiveChat {
+  header: string,
+  footer: string,
+  date?: string,
+  messages?: Array<string>
+}
+
+const activeChat = ({ header, footer, date = "", messages = [] }: ActiveChat): string => {
   const context = {
     chatWrapper: classes.chat__wrapper,
     chatInner: classes.chat__inner,

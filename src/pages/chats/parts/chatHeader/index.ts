@@ -1,7 +1,11 @@
 import chatHeaderTemplate from "./chatHeader.hbs";
 import * as classes from "./chatHeader.module.scss";
 
-const chatHeader = ({name}) => {
+interface ChatHeaderInterface {
+  name: string
+}
+
+const chatHeader = ({ name }: ChatHeaderInterface): string => {
   const context = {
     chatNav: classes.chat__nav,
     chatNavAvatar: classes.nav__avatar,

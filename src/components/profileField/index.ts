@@ -1,9 +1,14 @@
+import { ProfileFields } from "../../types/interfaces";
 import profileFieldTemplate from "./profileField.hbs";
 import * as classes from "./profileField.module.scss";
 
-const profileField = ({fields}) => {
+interface ProfileFieldInterface {
+  fields: Array<ProfileFields>
+}
+
+const profileField = ({ fields }: ProfileFieldInterface): string => {
   const context = {
-    fieldsTitle: classes.fields__title, 
+    fieldsTitle: classes.fields__title,
     fieldsValue: classes.fields__value,
     fieldWrapper: classes.field__wrapper,
     fields,

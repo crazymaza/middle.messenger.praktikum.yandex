@@ -2,7 +2,13 @@ import profileTemplate from "./profile.hbs";
 import * as classes from "./profile.module.scss";
 import avatarTmp from "../../img/avatarTmp.png";
 
-const profile = ({button, fields1, fields2 = []}) => {
+interface ProfileInterface {
+  button: string,
+  fields1: string,
+  fields2?: string,
+}
+
+const profile = ({ button, fields1, fields2 }: ProfileInterface): string => {
   const context = {
     profileWrapper: classes.profile__wrapper,
     profileTop: classes.profile__top,
