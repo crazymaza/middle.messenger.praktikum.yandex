@@ -1,6 +1,6 @@
-import { ProfileFields } from "../../types/interfaces";
-import profileInputTemplate from "./profileInput.hbs";
-import * as classes from "./profileInput.module.scss";
+import type { ProfileFields } from '../../types/interfaces';
+import profileInputTemplate from './profileInput.hbs';
+import * as classes from './profileInput.module.scss';
 
 interface ProfileInputInterface {
   fields: Array<ProfileFields>

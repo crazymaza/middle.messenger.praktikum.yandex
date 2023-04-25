@@ -15,14 +15,10 @@ export interface MessageInterface {
     img?: string,
     imgAlt?: string,
     isMine?: boolean,
-    message?: string,
+    text?: string,
 }
 
-type ProfileOptions = "first" | "second" | "changeData" | "changePassword";
-
-export type ProfileType = {
-    [key in ProfileOptions]: Array<ProfileFields>
-}
+type ProfileOptions = 'first' | 'second' | 'changeData' | 'changePassword';
 
 export interface ProfileFields {
     title: string,
@@ -31,4 +27,8 @@ export interface ProfileFields {
     href?: string,
     type?: string,
     name?: string,
+}
+
+export type ProfileType = {
+    [key in ProfileOptions]: Array<ProfileFields>
 }

@@ -1,17 +1,25 @@
-import wrapperTemplate from "./wrapper.hbs";
-import * as classes from "./wrapper.module.scss";
+import Block from '../../../../utils/block';
+import wrapperTemplate from './wrapper.hbs';
+import * as classes from './wrapper.module.scss';
 
 interface WrapperInterface {
-  sections: Array<string>,
+  sections: Array<Block>,
 }
 
-const wrapper = ({ sections }: WrapperInterface): string => {
-  const context = {
+class Wrapper extends Block<WrapperInterface> {
+  constructor(tagName: string, props: WrapperInterface) {
+    super(tagName, props);
+    this.children = props.sections;
+  }
+
+  context = {
     chatWrapper: classes.chat__wrapper,
-    sections
+    sections: this.props.sections,
   };
 
-  return wrapperTemplate(context);
-};
+  render(): DocumentFragment {
+    return this.compile(wrapperTemplate, { ...this.props.sections });
+  }
+}
 
-export default wrapper;
+export default Wrapper;

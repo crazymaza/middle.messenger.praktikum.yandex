@@ -1,5 +1,5 @@
-import dateTemplate from "./date.hbs";
-import * as classes from "./date.module.scss";
+import dateTemplate from './date.hbs';
+import * as classes from './date.module.scss';
 
 interface DateInterface {
   value: string

@@ -1,6 +1,6 @@
-import profileTemplate from "./profile.hbs";
-import * as classes from "./profile.module.scss";
-import avatarTmp from "../../img/avatarTmp.png";
+import profileTemplate from './profile.hbs';
+import * as classes from './profile.module.scss';
+import avatarTmp from '../../img/avatarTmp.png';
 
 interface ProfileInterface {
   button: string,

@@ -1,13 +1,13 @@
 {{#if isMine}}
     <div class={{chatMyMessage}}>
-        <p>{{message}}</p>
+        <p>{{text}}</p>
     </div>
 {{else}}
     <div class={{chatMessage}}>
         {{#if isImg}}
             <img src={{img}} alt={{imgAlt}}>
         {{else}}
-            <p>{{message}}</p>
+            <p>{{text}}</p>
         {{/if}}
     </div>
 {{/if}}

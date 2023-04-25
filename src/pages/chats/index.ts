@@ -1,11 +1,24 @@
-import chatTemplate from "./chat.hbs";
+import Block from '../../utils/block';
+import chatTemplate from './chat.hbs';
+import type Wrapper from './parts/wrapper';
 
 interface ChatInterface {
-  wrapper: string,
+  wrapper: Wrapper,
 }
 
-const chat = ({ wrapper }: ChatInterface): string => {
-  return chatTemplate({ wrapper });
-};
+class Chat extends Block<ChatInterface> {
+  constructor(tagName: string, props: ChatInterface) {
+    super(tagName, props);
+    this.children = props.wrapper;
+  }
 
-export default chat;
+  context = {
+    wrapper: this.props.wrapper,
+  };
+
+  render(): DocumentFragment {
+    return this.compile(chatTemplate, { ...this.props.wrapper });
+  }
+}
+
+export default Chat;

@@ -1,5 +1,5 @@
-import leftSectionTemplate from "./leftSection.hbs";
-import * as classes from "./leftSection.module.scss";
+import leftSectionTemplate from './leftSection.hbs';
+import * as classes from './leftSection.module.scss';
 
 interface LeftSectionInterface {
   items: string
