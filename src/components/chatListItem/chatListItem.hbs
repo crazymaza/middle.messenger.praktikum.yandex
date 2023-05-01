@@ -1,14 +1,12 @@
-{{#each listItems}}
-    <li class={{../chatListItem}}>
-        <div class={{../chatItemWrapper}} {{#if active}}{{../activeItem}}{{/if}}>
-            <div class={{../chatAvatar}}>
-            </div>
-            <p class={{../chatTitle}}>{{title}}</p>
-            <p class={{../chatSubtitle}}>{{subtitle}}</p>
-            <span class={{../chatDateTime}}>{{date}}</span>
-            {{#if newMessage}}
-                <span class={{../chatNewMessage}}>{{>dots newMessage}}</span>
-            {{/if}}
+<li class="{{chat__list_item}} {{#if active}}{{chat__list_item_active}}{{/if}}">
+    <div class={{chat__item_wrapper}}>
+        <div class={{chat__avatar}}>
         </div>
-    </li>
-{{/each}}
+        <p class={{chat__title}}>{{title}}</p>
+        <p class={{chat__subtitle}}>{{subtitle}}</p>
+        <span class={{chat__date_time}}>{{date}}</span>
+        {{#if newMessage}}
+        <span class={{chat__new_message}}>{{>dots newMessage}}</span>
+        {{/if}}
+    </div>
+</li>

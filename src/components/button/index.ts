@@ -1,3 +1,4 @@
+import Block from '../../utils/block';
 import buttonTemplate from './button.hbs';
 import * as classes from './button.module.scss';
 
@@ -5,16 +6,17 @@ interface ButtonInterface {
     text: string,
     hasSymbol?: boolean,
     type?: 'submit' | 'reset' | 'button',
+    events: {[key: string]: (event: Event) => void}
 }
 
-const button = ({ text, hasSymbol = false, type = 'submit' }: ButtonInterface): string => {
-  const context = {
-    button: classes.button,
-    text,
-    hasSymbol,
-    type,
-  };
-  return buttonTemplate(context);
-};
+class Button extends Block {
+  constructor(props: ButtonInterface) {
+    super('button', { ...props, ...classes });
+  }
 
-export default button;
+  render(): DocumentFragment {
+    return this.compile(buttonTemplate, this.props);
+  }
+}
+
+export default Button;

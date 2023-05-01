@@ -1,17 +1,28 @@
-<section class={{profileWrapper}}>
+<section class={{profile__wrapper}}>
     <form>
-        <div class={{profileTop}}>
-            <label class={{profileAvatar}}>
+        <div class={{profile__top}}>
+            <label class={{profile__avatar}}>
                 <input type="file" name="avatar" hidden>
                 <img src={{avatarTmp}} alt="Avatar">
             </label>
-            <p class={{avatarName}}>Иван</p>
+            <p class={{avatar__name}}>Иван</p>
         </div>
-        <div class={{profileFields}}>
-                {{{fields1}}}
-        <div class={{profileChange}}>
-                {{{fields2}}}
-        </div>
+        <div class={{profile__fields}}>
+            <ul>
+                {{{email}}}
+                {{{login}}}
+                {{{name}}}
+                {{{lastname}}}
+                {{{chatName}}}
+                {{{phone}}}
+            </ul>
+            <div class={{profile__change}}>
+                <ul>
+                    {{{changeData}}}
+                    {{{changePassword}}}
+                    {{{exit}}}
+                </ul>
+            </div>
     </form>
     <div class={{back}}>
         {{{button}}}

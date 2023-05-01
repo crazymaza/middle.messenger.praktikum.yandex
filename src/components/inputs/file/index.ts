@@ -1,18 +1,20 @@
+import Block from '../../../utils/block';
 import inputFileTemplate from './input.hbs';
 import * as classes from './input.module.scss';
 
 interface InputFileInterface {
-    value: string,
-    isImg?: boolean
+  value: string,
+  isImg?: boolean
 }
 
-const inputFile = ({ value, isImg = true }: InputFileInterface): string => {
-  const context = {
-    labelClass: classes.label,
-    value,
-    isImg,
-  };
-  return inputFileTemplate(context);
-};
+class InputFile extends Block {
+  constructor(props: InputFileInterface) {
+    super('input', { ...props, ...classes });
+  }
 
-export default inputFile;
+  render(): DocumentFragment {
+    return this.compile(inputFileTemplate, this.props);
+  }
+}
+
+export default InputFile;

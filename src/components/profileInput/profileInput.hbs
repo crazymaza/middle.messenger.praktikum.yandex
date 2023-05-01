@@ -1,10 +1,7 @@
-<ul>
-    {{#each fields}}
-        <li class={{../fieldWrapper}}>
-            <label>
-                <span class={{../fieldsTitle}}>{{title}}</span>
-                <input class={{../fieldsValue}} name={{name}} type={{type}} value={{value}}>
-            </label>
-        </li>
-    {{/each}}
-</ul>
+<li class={{field__wrapper}}>
+    <label>
+        <span class={{fields__title}}>{{title}}</span>
+        <input class={{fields__value}} name={{name}} type={{type}} value={{value}}>
+    </label>
+    <span name={{name}} class={{error}}></span>
+</li>

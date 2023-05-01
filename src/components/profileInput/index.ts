@@ -1,20 +1,14 @@
-import type { ProfileFields } from '../../types/interfaces';
+import Block from '../../utils/block';
 import profileInputTemplate from './profileInput.hbs';
 import * as classes from './profileInput.module.scss';
 
-interface ProfileInputInterface {
-  fields: Array<ProfileFields>
+class ProfileInput extends Block {
+  constructor(props: Record<string, any> = {}){
+    super('li', {...props, ...classes});
+  }
+
+  render(): DocumentFragment {
+      return this.compile(profileInputTemplate, this.props);
+  }
 }
-
-const profileInput = ({ fields }: ProfileInputInterface): string => {
-  const context = {
-    fieldsTitle: classes.fields__title,
-    fieldsValue: classes.fields__value,
-    fieldWrapper: classes.field__wrapper,
-    fields,
-  };
-
-  return profileInputTemplate(context);
-};
-
-export default profileInput;
+export default ProfileInput;

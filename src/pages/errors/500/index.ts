@@ -1,6 +1,15 @@
 import errorTemplate from './500.hbs';
 import * as classes from '../errors.module.scss';
+import Block from '../../../utils/block';
 
-const error500 = (): string => errorTemplate({ errorPage: classes.error__page });
+class Error500 extends Block {
+  constructor(props: Record<string, any> = {}) {
+    super('div', { ...props, ...classes });
+  }
 
-export default error500;
+  render(): DocumentFragment {
+    return this.compile(errorTemplate, this.props);
+  }
+}
+
+export default Error500;

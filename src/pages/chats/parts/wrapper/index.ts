@@ -1,24 +1,25 @@
 import Block from '../../../../utils/block';
+import LeftSection from '../leftSection';
+import RightSection from '../rightSection';
 import wrapperTemplate from './wrapper.hbs';
 import * as classes from './wrapper.module.scss';
 
-interface WrapperInterface {
-  sections: Array<Block>,
-}
+class Wrapper extends Block {
+  constructor(props: Record<string, any> = {}) {
 
-class Wrapper extends Block<WrapperInterface> {
-  constructor(tagName: string, props: WrapperInterface) {
-    super(tagName, props);
-    this.children = props.sections;
+    const leftSection = new LeftSection();
+    const rightSection = new RightSection();
+
+    super('div', {
+      ...props,
+      ...classes,
+      leftSection,
+      rightSection,
+    });
   }
 
-  context = {
-    chatWrapper: classes.chat__wrapper,
-    sections: this.props.sections,
-  };
-
   render(): DocumentFragment {
-    return this.compile(wrapperTemplate, { ...this.props.sections });
+    return this.compile(wrapperTemplate, this.props);
   }
 }
 

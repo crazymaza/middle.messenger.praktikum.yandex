@@ -1,17 +1,25 @@
-import type { AuthInterface } from '../../../types/interfaces';
+import Block from '../../../utils/block';
 import inputTemplate from './input.hbs';
 import * as classes from './input.module.scss';
 
-interface InputTextInterface {
-    inputs: Array<AuthInterface>
+interface InputProps {
+  name: string;
+  label: string;
+  type: string;
+  events: {
+    change?: (event: Event) => void;
+    input?: (event: Event) => void;
+  };
 }
 
-const input = ({ inputs }: InputTextInterface): string => {
-  const context = {
-    inputTitle: classes.input__title,
-    inputs,
-  };
-  return inputTemplate(context);
-};
+class Input extends Block {
+  constructor(props: InputProps) {
+    super('input', { ...props, ...classes });
+  }
 
-export default input;
+  render() {
+    return this.compile(inputTemplate, this.props);
+  }
+}
+
+export default Input;

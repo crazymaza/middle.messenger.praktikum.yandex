@@ -1,4 +1,4 @@
-@use "../../../../style.scss" as v;
+@use "../../../../style.scss"as v;
 
 footer {
     .footer__form {
@@ -8,6 +8,7 @@ footer {
         border-top: 1px solid v.$background;
         padding: 11px 0;
         gap: 10px;
+        position: relative;
 
         input {
             width: 100%;
@@ -26,5 +27,12 @@ footer {
             height: auto;
             margin-bottom: 0;
         }
+    }
+
+    .error {
+        color: red;
+        position: absolute;
+        bottom: -5px;
+        left: 40px;
     }
 }

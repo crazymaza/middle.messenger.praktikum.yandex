@@ -5,7 +5,7 @@ export default class EventBus {
     this.listeners = {};
   }
 
-  on(event: string, callback: () => {}) {
+  on(event: string, callback: () => any) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -13,7 +13,7 @@ export default class EventBus {
     this.listeners[event].push(callback);
   }
 
-  off(event: string, callback: () => {}) {
+  off(event: string, callback: () => any) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }

@@ -1,6 +1,15 @@
 import errorTemplate from './404.hbs';
 import * as classes from '../errors.module.scss';
+import Block from '../../../utils/block';
 
-const error404 = (): string => errorTemplate({ errorPage: classes.error__page });
+class Error404 extends Block {
+  constructor(props: Record<string, any> = {}) {
+    super('div', { ...props, ...classes });
+  }
 
-export default error404;
+  render(): DocumentFragment {
+    return this.compile(errorTemplate, this.props);
+  }
+}
+
+export default Error404;

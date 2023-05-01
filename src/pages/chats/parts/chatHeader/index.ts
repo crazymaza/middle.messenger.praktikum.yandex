@@ -1,20 +1,15 @@
+import Block from '../../../../utils/block';
 import chatHeaderTemplate from './chatHeader.hbs';
 import * as classes from './chatHeader.module.scss';
 
-interface ChatHeaderInterface {
-  name: string
+class ChatHeader extends Block {
+  constructor(props: Record<string, any> = {}) {
+    super('div', { ...props, ...classes });
+  }
+
+  render(): DocumentFragment {
+    return this.compile(chatHeaderTemplate, this.props);
+  }
 }
 
-const chatHeader = ({ name }: ChatHeaderInterface): string => {
-  const context = {
-    chatNav: classes.chat__nav,
-    chatNavAvatar: classes.nav__avatar,
-    chatNavName: classes.nav__name,
-    navDots: classes.nav__dots,
-    name,
-  };
-
-  return chatHeaderTemplate(context);
-};
-
-export default chatHeader;
+export default ChatHeader;

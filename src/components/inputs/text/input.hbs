@@ -1,6 +1,5 @@
-{{#each inputs}}
     <label data-id={{name}}>
-        <span class={{../inputTitle}}>{{text}}</span>
+        <span class={{input__title}}>{{label}}</span>
         <input type={{type}} name={{name}}>
+        <span name={{name}} class={{error}}></span>
     </label>
-{{/each}}
