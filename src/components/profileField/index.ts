@@ -4,7 +4,6 @@ import * as classes from './profileField.module.scss';
 
 class ProfileField extends Block {
   constructor(props: Record<string, any> = {}) {
-
     super('li', { ...props, ...classes });
   }
 

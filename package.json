@@ -7,7 +7,8 @@
     "start": "parcel static/index.html --port 3000 --no-cache",
     "build": "parcel build static/index.html --no-cache",
     "serve": "node src/server.js",
-    "eslint": "eslint **/src/**/*.ts --fix --color --max-warnings=0"
+    "eslint": "eslint **/src/**/*.ts --fix --color --max-warnings=0",
+    "stylelint": "stylelint --fix **/*.{css,scss}"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,10 @@
     "express": "^4.18.2",
     "parcel": "^2.8.3",
     "parcel-transformer-hbs": "^1.0.4",
+    "postcss-scss": "^4.0.6",
+    "stylelint": "^15.6.0",
+    "stylelint-config-standard": "^33.0.0",
+    "stylelint-scss": "^5.0.0",
     "typescript": "^5.0.4"
   },
   "engines": {

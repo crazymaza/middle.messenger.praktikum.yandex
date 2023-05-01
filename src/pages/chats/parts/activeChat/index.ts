@@ -1,3 +1,4 @@
+import Divider from '../../../../components/divider';
 import Message from '../../../../components/message';
 import { MessageInterface } from '../../../../types/interfaces';
 import Block from '../../../../utils/block';
@@ -6,7 +7,6 @@ import ChatFooter from '../chatFooter';
 import ChatHeader from '../chatHeader';
 import activeChatTemplate from './activeChat.hbs';
 import * as classes from './activeChat.module.scss';
-
 
 class ActiveChat extends Block {
   constructor(props: Record<string, any> = {}) {
@@ -21,6 +21,7 @@ class ActiveChat extends Block {
     super('div', {
       ...props,
       ...classes,
+      date: new Divider({ value: '19 июля' }),
       message1: activeMessages[0],
       message2: activeMessages[1],
       message3: activeMessages[2],
