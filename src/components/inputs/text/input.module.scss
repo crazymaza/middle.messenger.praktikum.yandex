@@ -5,18 +5,18 @@ label {
     display: flex;
     flex-direction: column;
 
+    .input__title {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+    }
+
     &:focus-within {
         .input__title {
             font-size: 9px;
             color: v.$helper;
             top: -5px;
         }
-    }
-
-    .input__title {
-        position: absolute;
-        bottom: 5px;
-        left: 0;
     }
 
     input {

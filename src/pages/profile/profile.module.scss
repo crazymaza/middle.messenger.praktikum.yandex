@@ -1,8 +1,41 @@
 @use "../../style.scss"as v;
 
 .profile {
+    &__change {
+        width: 510px;
+        margin-top: 40px;
+
+        span,
+        a {
+            font-size: 13px;
+            line-height: 13px;
+            color: v.$primary;
+        }
+
+        li {
+            list-style: none;
+            border-bottom: 1px solid v.$background;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+
+            &:last-child {
+                border-bottom: none;
+
+                span,
+                a {
+                    color: v.$danger;
+                }
+            }
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+
     &__wrapper {
-        height: calc(100vh - v.$navHeigth);
+        height: calc(100vh - v.$nav-heigth);
         padding-top: 60px;
         display: flex;
         flex-direction: column;
@@ -19,7 +52,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: v.$backLight;
+            background-color: v.$back-light;
             border-right: 1px solid v.$background;
             ;
 
@@ -66,38 +99,5 @@
 
     &__fields {
         width: 510px;
-    }
-
-    &__change {
-        width: 510px;
-        margin-top: 40px;
-
-        li {
-            list-style: none;
-            border-bottom: 1px solid v.$background;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-
-            &:last-child {
-                border-bottom: none;
-
-                span,
-                a {
-                    color: v.$danger;
-                }
-            }
-
-            span,
-            a {
-                font-size: 13px;
-                line-height: 13px;
-                color: v.$primary;
-            }
-        }
-
-        button {
-            display: block;
-            margin: 0 auto;
-        }
     }
 }

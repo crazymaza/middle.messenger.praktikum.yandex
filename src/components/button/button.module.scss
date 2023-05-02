@@ -7,11 +7,11 @@
     background: v.$primary;
     border-radius: 8px;
     border: none;
-    color: v.$buttonText;
+    color: v.$button-text;
     transition: 0.3s ease;
     margin-bottom: 10px;
 
     &:hover {
-        background: darken(v.$primary, 20%);
+        background: adjust(v.$primary, -20%);
     }
 }

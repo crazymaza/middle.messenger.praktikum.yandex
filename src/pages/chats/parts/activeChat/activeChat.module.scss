@@ -2,7 +2,7 @@
 
 .chat {
     &__wrapper {
-        height: calc(100vh - v.$navHeigth - 20px);
+        height: calc(100vh - v.$nav-heigth - 20px);
         display: flex;
         flex-direction: column;
         justify-content: space-between;

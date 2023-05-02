@@ -1,13 +1,13 @@
-$navHeigth: 45px;
+$nav-heigth: 45px;
 $primary: #3369F3;
 $danger: #F00; 
 $background: #EFEFEF;
-$backLight: #FBFBFB;
+$back-light: #FBFBFB;
 $helper: #999;
-$buttonText: white;
-$chatTitle: #1E1E1E;
-$messageBackground: #F8F8F8;
-$myMessage: #E4EDFD;
+$button-text: white;
+$chat-title: #1E1E1E;
+$message-background: #F8F8F8;
+$my-message: #E4EDFD;
 
 
 
@@ -28,7 +28,7 @@ button {
 nav {
     display: flex;
     justify-content: center;
-    max-height: $navHeigth;
+    max-height: $nav-heigth;
     padding: 10px 0;
     border-bottom: 1px solid gray;
 
