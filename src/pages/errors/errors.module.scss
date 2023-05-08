@@ -1,7 +1,7 @@
 @use "../../style.scss" as v;
 
 .error__page {
-    height: calc(100vh - v.$navHeigth);
+    height: calc(100vh - v.$nav-heigth);
     display: flex;
     flex-direction: column;
     align-items: center;

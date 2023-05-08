@@ -1,18 +1,21 @@
-@use "../../style.scss" as v;
+@use "../../style.scss"as v;
 
 .field__wrapper {
     display: flex;
     justify-content: space-between;
     list-style: none;
-    border-bottom: 1px solid v.$background;
-    padding-bottom: 10px;
     margin-bottom: 10px;
+    flex-direction: column;
 
     label {
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-direction: row;
+        padding-bottom: 10px;
+        border-bottom: 1px solid v.$background;
+
         .fields {
             &__title {
                 font-size: 13px;
@@ -27,5 +30,9 @@
                 border: none;
             }
         }
+    }
+
+    .error {
+        color: red;
     }
 }

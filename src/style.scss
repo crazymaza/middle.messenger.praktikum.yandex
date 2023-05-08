@@ -1,20 +1,20 @@
-$navHeigth: 45px;
+$nav-heigth: 45px;
 $primary: #3369F3;
-$danger: #FF0000; 
+$danger: #F00; 
 $background: #EFEFEF;
-$backLight: #FBFBFB;
-$helper: #999999;
-$buttonText: white;
-$chatTitle: #1E1E1E;
-$messageBackground: #F8F8F8;
-$myMessage: #E4EDFD;
+$back-light: #FBFBFB;
+$helper: #999;
+$button-text: white;
+$chat-title: #1E1E1E;
+$message-background: #F8F8F8;
+$my-message: #E4EDFD;
 
 
 
 * {
     padding: 0;
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 a {
@@ -28,7 +28,7 @@ button {
 nav {
     display: flex;
     justify-content: center;
-    max-height: $navHeigth;
+    max-height: $nav-heigth;
     padding: 10px 0;
     border-bottom: 1px solid gray;
 
@@ -57,7 +57,7 @@ nav {
 .active {
     span {
         font-size: 9px;
-        color: #999999;
+        color: #999;
         top: -5px;
     }
 }

@@ -1,7 +1,15 @@
-@use "../../../style.scss" as v;
+@use "../../../style.scss"as v;
 
 label {
     position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .input__title {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+    }
 
     &:focus-within {
         .input__title {
@@ -9,12 +17,6 @@ label {
             color: v.$helper;
             top: -5px;
         }
-    }
-
-    .input__title {
-        position: absolute;
-        bottom: 5px;
-        left: 0;
     }
 
     input {
@@ -25,5 +27,11 @@ label {
         font-size: 13px;
         line-height: 13px;
         padding: 5px 5px 5px 0;
+    }
+
+    .error {
+        color: red;
+        font-size: 14px;
+        width: 285px;
     }
 }

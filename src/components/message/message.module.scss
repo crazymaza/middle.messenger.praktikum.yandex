@@ -1,22 +1,21 @@
 @use "../../style.scss" as v;
 
 .chat {
-
     &__message,
     &__message_my {
         max-width: 380px;
         font-weight: 500;
         font-size: 12px;
         line-height: 15px;
-        background: v.$messageBackground;
+        background: v.$message-background;
         border: 1px solid v.$background;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
         border-radius: 10px;
         padding: 11px;
         margin-bottom: 10px;
 
         &_my {
-            background: v.$myMessage;
+            background: v.$my-message;
             border-bottom-right-radius: 0;
             align-self: flex-end;
         }

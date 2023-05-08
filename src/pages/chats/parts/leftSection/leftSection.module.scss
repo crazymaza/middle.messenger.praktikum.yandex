@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 18px;
     padding-top: 20px;
-    background: v.$backLight;
+    background: v.$back-light;
 }
 
 .profile {
@@ -16,7 +16,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-        color: darken(v.$helper, 10%)
+        color: adjust(v.$helper, -10%)
     }
 
     span {
