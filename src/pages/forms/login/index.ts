@@ -5,6 +5,10 @@ import Input from '../../../components/inputs/text';
 import Button from '../../../components/button';
 import { checkInput, checkSubmitForm, clearError } from '../../../utils/utils';
 import { rules, BASE_URL, SIGNUP_PATH } from '../../../utils/constants';
+import { LoginFormDataInterface } from '../../../types/interfaces';
+import Link from '../../../components/link';
+import { router } from '../../..';
+import  AuthController from '../../../controllers/AuthController';
 
 class Signin extends Block {
   constructor(props: Record<string, any> = {}) {
@@ -41,10 +45,25 @@ class Signin extends Block {
       type: 'submit',
       events: {
         click: (event: Event) => {
-          checkSubmitForm(event);
-        }
+          const registerFormData: LoginFormDataInterface | undefined = checkSubmitForm(event);
+          if (registerFormData) {
+              AuthController.authUser(registerFormData);
+          }
+        } 
       }
     });
+
+    const signupLink = new Link({
+      text: 'Нет аккаунта?',
+      href: SIGNUP_PATH,
+      classes: classes.form__same_btn,
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          router.go(SIGNUP_PATH);
+        },
+      },
+    })
 
     super('div', {
       ...props,
@@ -53,7 +72,7 @@ class Signin extends Block {
       inputPassword,
       button,
       url: `${BASE_URL}${SIGNUP_PATH}`,
-      registerLink: 'Нет аккаунта?',
+      signupLink,
       title: 'Вход',
     });
   }

@@ -2,10 +2,13 @@ import registerTemplate from './register.hbs';
 import * as classes from '../forms.module.scss';
 import Block from '../../../utils/block';
 import Input from '../../../components/inputs/text';
-import type { AuthInterface } from '../../../types/interfaces';
+import type { AuthInterface, RegisterFormDataInterface } from '../../../types/interfaces';
 import Button from '../../../components/button';
 import { checkInput, checkSubmitForm, clearError } from '../../../utils/utils';
-import { BASE_URL, SIGNUP_PATH, rules } from '../../../utils/constants';
+import { BASE_URL, SIGNIN_PATH, rules } from '../../../utils/constants';
+import Link from '../../../components/link';
+import { router } from '../../..';
+import AuthController from '../../../controllers/AuthController';
 
 const registerInputs: Array<AuthInterface> = [
   { name: 'email', text: 'Почта', type: 'email' },
@@ -43,18 +46,36 @@ class Signup extends Block {
       type: 'submit',
       events: {
         click: (event: Event) => {
-          checkSubmitForm(event);
+          const registerFormData: RegisterFormDataInterface | undefined = checkSubmitForm(event);
+          if (registerFormData) {
+            const dataWithoutComfirmPass = Object.keys(registerFormData)
+              .filter((key: string) => key !== 'password_confirm')
+              .reduce((acc, curr: keyof RegisterFormDataInterface) => ({ ...acc, [curr]: registerFormData[curr] }), {});
+            AuthController.registerUser(dataWithoutComfirmPass as RegisterFormDataInterface);
+          }
         }
       }
     });
+
+    const signinLink = new Link({
+      text: 'Войти',
+      href: SIGNIN_PATH,
+      classes: classes.form__same_btn,
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          router.go(SIGNIN_PATH);
+        },
+      },
+    })
 
     super('div', {
       ...props,
       ...classes,
       ...inputs,
       button,
-      url: `${BASE_URL}${SIGNUP_PATH}`,
-      enterLink: 'Войти',
+      url: `${BASE_URL}${SIGNIN_PATH}`,
+      signinLink,
       title: 'Регистрация',
     });
   }

@@ -1,17 +1,24 @@
 import profileTemplate from './profile.hbs';
+import avatarTmp from '../../img/avatarTmp.png'
 import * as classes from './profile.module.scss';
-import avatarTmp from '../../img/avatarTmp.png';
 import Block from '../../utils/block';
 import ProfileField from '../../components/profileField';
 import Button from '../../components/button';
 import ProfileInput from '../../components/profileInput';
-import { checkInput, checkSubmitForm, clearError } from '../../utils/utils';
+import { checkInput, checkSubmitForm, clearError, getAllFormData } from '../../utils/utils';
 import {
   profileFields,
   rules,
   PASSWORD_SETTING_PATH,
-  PROFILE_SETTING_PATH
+  PROFILE_SETTING_PATH,
+  CHATS_1_PATH
 } from '../../utils/constants';
+import { router } from '../..';
+import Link from '../../components/link';
+import InputFile from '../../components/inputs/file';
+import AuthController from '../../controllers/AuthController';
+import UserController from '../../controllers/UserController';
+import { UserApi } from '../../api/user-api';
 
 const getFields = (): ProfileInput[] | {
   fields1: ProfileField[];
@@ -24,8 +31,9 @@ const getFields = (): ProfileInput[] | {
       value: curr.value,
       link: curr.link,
       href: curr.href,
-      type: curr.title,
+      type: curr.label,
       name: curr.name,
+      label: curr.label,
     }),
   ], []);
 
@@ -35,9 +43,22 @@ const getFields = (): ProfileInput[] | {
       title: curr.title,
       value: curr.value,
       link: curr.link,
-      href: curr.href,
-      type: curr.title,
+      fieldLink: new Link({
+        text: curr.title,
+        href: curr.href || '',
+        events: {
+          click: (event) => {
+            if (curr.title === 'Выйти') {
+              AuthController.logout();
+            }
+            event.preventDefault();
+            router.go(curr.href || '')
+          }
+        }
+      }),
+      type: curr.label,
       name: curr.name,
+      label: curr.label,
     })], []);
 
   const changeData = profileFields.changeData.reduce((acc, curr) => [
@@ -91,6 +112,23 @@ class Profile extends Block {
       fields1: ProfileField[];
       fields2: ProfileField[];
     } = getFields();
+
+    const avatar = new InputFile({
+      isImg: true,
+      value: '',
+      name: 'avatar',
+    });
+
+    AuthController.getUser()?.then(
+      (data: any) => {
+        const field = Array.isArray(fields) ? fields : fields.fields1
+        field.forEach((item) => {
+          item.setProps({ value: data[item.props.label || item.props.name] })
+        })
+        avatar.setProps({ value: data.avatar ? `https://ya-praktikum.tech/api/v2/resources${data.avatar}` : avatarTmp });
+      }
+    )
+
     super('form', {
       ...props,
       ...classes,
@@ -106,19 +144,34 @@ class Profile extends Block {
           events: {
             click: (event: Event) => {
               checkSubmitForm(event);
+
+              const data = getAllFormData(event);
+              if (Object.hasOwn(data, 'oldPassword')) {
+                UserController.changePassword(data);
+                return;
+              }
+              if (Object.hasOwn(data, 'avatar') && data.avatar) {
+                const avatarElem = document.querySelector('input[name=avatar]') as HTMLInputElement
+                if (avatarElem && avatarElem.files) {
+                  const formData = new FormData();
+                  formData.append("avatar", avatarElem.files[0]);
+                  UserController.changeAvatar(formData);
+                }
+              }
+              UserController.changeProfile(data);
             }
           }
         })
         : fields.fields2[0],
       changePassword: Array.isArray(fields) ? null : fields.fields2[1],
       exit: Array.isArray(fields) ? null : fields.fields2[2],
-      avatarTmp,
+      avatar,
       button: new Button({
         text: '&larr;',
         hasSymbol: true,
         type: 'button',
         events: {
-          click: () => window.location.replace('/')
+          click: () => router.go(CHATS_1_PATH)
         }
       }),
     });
