@@ -4,7 +4,8 @@ import * as classes from './input.module.scss';
 
 interface InputFileInterface {
   value: string,
-  isImg?: boolean
+  isImg?: boolean,
+  name?: string,
 }
 
 class InputFile extends Block {

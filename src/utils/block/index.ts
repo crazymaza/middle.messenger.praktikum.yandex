@@ -12,7 +12,7 @@ const enum Events {
 type Props = Record<string, any>;
 
 class Block {
-  eventBus: () => EventBus;
+  eventBus: EventBus;
 
   tagName: string;
 
@@ -28,14 +28,13 @@ class Block {
     const { children, props } = this._getChildren(propsAndChildren);
     this.children = children;
     // создаём Event Bus
-    const eventBus = new EventBus();
-    this.eventBus = () => eventBus;
+    this.eventBus = new EventBus();
     this.id = makeUUID();
     // создаём Proxy-объекты
     this.props = this._makePropsProxy({ ...props, id: this.id });
     this.tagName = tagName;
-    this._registerEvents(eventBus);
-    eventBus.emit(Events.INIT);
+    this._registerEvents(this.eventBus);
+    this.eventBus.emit(Events.INIT);
   }
 
   // регистрация событий, подписка на изменения
@@ -52,7 +51,7 @@ class Block {
 
   init() {
     this._createResources();
-    this.eventBus().emit(Events.FLOW_RENDER);
+    this.eventBus.emit(Events.FLOW_RENDER);
   }
 
   private _componentDidMount(oldProps: Props) {
@@ -67,7 +66,7 @@ class Block {
 
   // стригерить измения
   dispatchComponentDidMount() {
-    this.eventBus().emit(Events.FLOW_CDM);
+    this.eventBus.emit(Events.FLOW_CDM);
   }
 
   // отрисует новые данные.
@@ -87,7 +86,8 @@ class Block {
     if (!nextProps) {
       return;
     }
-
+    const { children, props } = this._getChildren(nextProps);
+    Object.assign(this.children, children);
     Object.assign(this.props, nextProps);
   };
 
@@ -116,32 +116,35 @@ class Block {
     return this.element;
   }
 
-  private _makePropsProxy(props: Props) {
-    // Proxy-объект. Применение данного инструмента поможет использовать Event Bus, убрать какую-либо тесную связность между методами и подписываться только на события
-    // target это сам обьект props а prop это key от полученого в проксти объекта props,
+  private _makePropsProxy(props: any) {
+    //Proxy-объект. Применение данного инструмента поможет использовать Event Bus, убрать какую-либо тесную связность между методами и подписываться только на события
+    //target это сам обьект props а prop это key от полученого в проксти объекта props,
+
     const proxyProps = new Proxy(props, {
-      // Когда мы читаем свойства объекта proxyProps, выполняется функция get
-      get(target, prop: string) {
-        if (prop.startsWith('_')) {
-          throw new Error('нет доступа');
+      //Когда мы читаем свойства объекта proxyProps, выполняется функция get
+      get: (target, prop: string) => {
+        if (prop.startsWith("_")) {
+          throw new Error("нет доступа");
         } else {
           const value = target[prop];
-          return typeof value === 'function' ? value.bind(target) : value;
+
+          return typeof value === "function" ? value.bind(target) : value;
         }
       },
-      // Функция срабатывает при попытке задать значение свойству объекта:
-      // value это передаваемое дополнительное значение при установке значения свойства
-      set(target, prop: string, value) {
-        if (prop.startsWith('_')) {
-          throw new Error('нет доступа');
+      //Функция срабатывает при попытке задать значение свойству объекта:
+      //value это передаваемое дополнительное значение при установке значения свойства
+      set: (target, prop: string, value) => {
+        if (prop.startsWith("_")) {
+          throw new Error("нет доступа");
         } else {
           target[prop] = value;
-          this.eventBus().emit(Events.FLOW_CDU, target);
+
+          this.eventBus.emit(Events.FLOW_CDU, target);
           return true;
         }
       },
-      deleteProperty() {
-        throw new Error('Нет доступа');
+      deleteProperty: () => {
+        throw new Error("Нет доступа");
       },
     });
 
@@ -178,15 +181,24 @@ class Block {
   }
 
   // из всех пропсов выделить компоненты и записать в свойство children
-  private _getChildren(propsAndChildren: Record<string, any>) {
-    const children: Record<string, any> = {};
-    const props: Record<string, any> = {};
+  private _getChildren(propsAndChildren: any) {
+    const children: any = {};
+    const props: any = {};
 
-    Object.entries(propsAndChildren).forEach(([key, value]: [string, any]) => {
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value;
       } else {
-        props[key] = value;
+        if (Array.isArray(value) && value[0] instanceof Block) {
+          value.forEach((item, index) => {
+            if (!children[key]) {
+              children[key] = [];
+            }
+            children[key][index] = item;
+          });
+        } else {
+          props[key] = value;
+        }
       }
     });
 

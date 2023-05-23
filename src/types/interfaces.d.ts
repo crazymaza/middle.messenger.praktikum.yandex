@@ -27,8 +27,35 @@ export interface ProfileFields {
     href?: string,
     type?: string,
     name?: string,
+    label?: string,
 }
 
 export type ProfileType = {
     [key in ProfileOptions]: Array<ProfileFields>
+}
+
+export interface RegisterFormDataInterface {
+    [x: string]: string;
+    first_name: string,
+    second_name: string,
+    login: string,
+    email: string,
+    password: string,
+    phone: string,
+}
+
+export interface LoginFormDataInterface {
+    login: string,
+    password: string,
+}
+
+export interface ProfileInterface {
+    id: number,
+    first_name: string,
+    second_name: string,
+    display_name: string,
+    login: string,
+    email: string,
+    phone: string,
+    avatar: string,
 }
