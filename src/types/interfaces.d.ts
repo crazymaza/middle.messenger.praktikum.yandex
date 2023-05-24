@@ -7,7 +7,9 @@ export interface ItemDataInterface {
     subtitle: string,
     date: string,
     newMessage: number,
+    chatId: number,
     active?: boolean,
+    events?: {[key: string]: () => void}
 }
 
 export interface MessageInterface {

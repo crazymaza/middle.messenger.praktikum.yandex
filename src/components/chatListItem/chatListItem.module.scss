@@ -5,10 +5,15 @@
         display: grid;
         grid-template: "avatar title dateTime"1fr "avatar subtitle newMessage"1fr / minmax(47px, 60px) 2fr 1fr;
         align-items: center;
-        border-bottom: 1px solid adjust(v.$background, -5%);
+        border-bottom: 1px solid v.$background;
         padding-top: 12px;
         padding-bottom: 12px;
-        margin: 0 10px;
+        margin: 0 10px; 
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: rgb(168, 217, 242);
+        }
     }
 
     &__avatar {
@@ -62,9 +67,13 @@
         &_item {
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
 
             &:hover {
                 background-color: adjust(v.$background, 2%);
+                .chat__delete {
+                    right: 0;
+                }
             }
 
             &:first-child {
@@ -74,8 +83,26 @@
             }
 
             &_active {
-                background-color: v.$background;
+                background-color: #5296f5;
             }
+        }
+    }
+    &__delete {
+        position: absolute;
+        top: 0;
+        right: -50px;
+        width: 50px;
+        height: 100%;
+        background-color: #ff3a3a;
+        transition: all 0.3s ease-in;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+
+        button {
+            background: url(../../img/trash.svg) center bottom no-repeat;
+            max-width: 50px;
+            padding: 25px;
+            margin: 0;
         }
     }
 }
