@@ -2,9 +2,8 @@ import { router } from '../../../..';
 import ChatListItem from '../../../../components/chatListItem';
 import Link from '../../../../components/link';
 import ChatController from '../../../../controllers/ChatController';
-import { ItemDataInterface } from '../../../../types/interfaces';
 import Block from '../../../../utils/block';
-import { PROFILE_PATH, listItemsData } from '../../../../utils/constants';
+import { PROFILE_PATH } from '../../../../utils/constants';
 import store, { StoreEvents } from '../../../../utils/store';
 import leftSectionTemplate from './leftSection.hbs';
 import * as classes from './leftSection.module.scss';
@@ -12,20 +11,10 @@ import * as classes from './leftSection.module.scss';
 class LeftSection extends Block {
   constructor(props: Record<string, any> = {}) {
 
-    // let chatList = listItemsData.map((item: ItemDataInterface) => {
-    //   return new ChatListItem({
-    //     title: item.title,
-    //     subtitle: item.subtitle,
-    //     date: item.date,
-    //     newMessage: item.newMessage,
-    //     active: item.active
-    //   })})
-
     ChatController.getChats();
     store.on(StoreEvents.Updated, () => {
       const { chats } = store.getState();
       
-      //Сделать обработку массивов
       const chatList: any[] = [];
       chats.forEach((chat: any) => {
         chatList.push(new ChatListItem({
@@ -33,7 +22,7 @@ class LeftSection extends Block {
           subtitle: chat.subtitle,
           date: chat.time ? new Date(chat.time).getDate().toString() : '',
           newMessage: chat.unread_count,
-          active: false
+          active: true
         }))
       })
       this.setProps({chatList})
@@ -59,15 +48,7 @@ class LeftSection extends Block {
     //     }
     //   }
     // ]
-    // ChatController.getChats()?.then((data) => {
-    //   chatList = data.map((item: any) => (new ChatListItem({
-    //     title: item.title,
-    //     subtitle: item.subtitle,
-    //     date: new Date(item.time).getDate().toString(),
-    //     newMessage: item.unread_count,
-    //     active: false
-    //   }))
-    // )})
+
     const profile = new Link({
       text: 'Профиль >',
       href: PROFILE_PATH,
@@ -79,12 +60,11 @@ class LeftSection extends Block {
         }
       }
     })
-
+    
     super('div', {
       ...props,
       ...classes,
-      profile,
-      // chatList
+      profile
     });
   }
 

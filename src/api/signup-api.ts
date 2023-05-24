@@ -6,6 +6,6 @@ import { BaseAPI } from "./base-api";
 export class SignupApi extends BaseAPI {
     create(data: RegisterFormDataInterface): Promise<unknown> | undefined {
         if (!data) return;
-        return new HTTPTransport().post(`${API_URL}/auth/signup`, { data })
+        return new HTTPTransport().post(`${API_URL}/auth/signup`, { data, headers: { 'content-type': 'application/json' }})
     }
 }
