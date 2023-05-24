@@ -6,5 +6,5 @@ export class BaseAPI {
 
     update() { throw new Error('Not implemented'); }
 
-    delete() { throw new Error('Not implemented'); }
+    delete(_data?: unknown) { throw new Error('Not implemented'); }
 }

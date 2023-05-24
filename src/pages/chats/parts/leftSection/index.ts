@@ -1,5 +1,7 @@
 import { router } from '../../../..';
+import Button from '../../../../components/button';
 import ChatListItem from '../../../../components/chatListItem';
+import Input from '../../../../components/inputs/text';
 import Link from '../../../../components/link';
 import ChatController from '../../../../controllers/ChatController';
 import Block from '../../../../utils/block';
@@ -14,7 +16,7 @@ class LeftSection extends Block {
     ChatController.getChats();
     store.on(StoreEvents.Updated, () => {
       const { chats } = store.getState();
-      
+
       const chatList: any[] = [];
       chats.forEach((chat: any) => {
         chatList.push(new ChatListItem({
@@ -22,32 +24,25 @@ class LeftSection extends Block {
           subtitle: chat.subtitle,
           date: chat.time ? new Date(chat.time).getDate().toString() : '',
           newMessage: chat.unread_count,
-          active: true
+          active: false,
+          chatId: chat.id,
+          events: {
+            click: () => {
+              this.children.chatList.forEach((chatItem: any) => {
+                if (chat.id === chatItem.props.chatId) {
+                  chatItem.setProps({ active: true });
+                  store.set('activeChat', chat.id);
+                  ChatController.getChatToketById(chat.id);
+                } else {
+                  chatItem.setProps({ active: false });
+                }
+              })
+            }
+          }
         }))
       })
-      this.setProps({chatList})
+      this.setProps({ chatList })
     })
-
-    // [
-    //   {
-    //     "id": 123,
-    //     "title": "my-chat",
-    //     "avatar": "/123/avatar1.jpg",
-    //     "unread_count": 15,
-    //     "last_message": {
-    //       "user": {
-    //         "first_name": "Petya",
-    //         "second_name": "Pupkin",
-    //         "avatar": "/path/to/avatar.jpg",
-    //         "email": "my@email.com",
-    //         "login": "userLogin",
-    //         "phone": "8(911)-222-33-22"
-    //       },
-    //       "time": "2020-01-02T14:22:22.000Z",
-    //       "content": "this is message content"
-    //     }
-    //   }
-    // ]
 
     const profile = new Link({
       text: 'Профиль >',
@@ -60,11 +55,38 @@ class LeftSection extends Block {
         }
       }
     })
-    
+
+    const newChatInput = new Input({
+      name: 'newСhat',
+      label: 'Название чата',
+      type: 'text',
+      events: {},
+    })
+
+    const createNewChat = new Button({
+      text: 'Создать новый чат',
+      type: 'submit',
+      events: {
+        click: (event: any) => {
+          event.preventDefault();
+          if (event.target && event.target.form[0]?.value) {
+            ChatController.createNewChat(event.target.form[0].value)
+              ?.then(() => {
+                event.target.form[0].value = null;
+                event.target.form[0].labels[0].classList.remove('active');
+
+              })
+          }
+        }
+      }
+    })
+
     super('div', {
       ...props,
       ...classes,
-      profile
+      profile,
+      newChatInput,
+      createNewChat
     });
   }
 

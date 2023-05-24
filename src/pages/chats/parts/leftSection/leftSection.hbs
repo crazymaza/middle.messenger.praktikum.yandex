@@ -1,9 +1,13 @@
 <section class={{chat__left_section}}>
     {{{profile}}}
     <input type="text" class={{search}} placeholder="&#128269;&nbsp;Поиск">
-    <ul>
+    <ul class={{chat__listWrapper}}>
         {{#each chatList}}
             {{{chatList}}}
         {{/each}}
     </ul>
+    <form class="{{chat__createNew}} formInputs">
+        {{{newChatInput}}}
+        {{{createNewChat}}}
+    </form>
 </section>
