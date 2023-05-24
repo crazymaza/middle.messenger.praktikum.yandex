@@ -12,6 +12,7 @@ class ChatFooter extends Block {
     const button1 = new InputFile({
       value: clip,
       isImg: true,
+      name: 'hidden'
     })
 
     const button2 = new Button({

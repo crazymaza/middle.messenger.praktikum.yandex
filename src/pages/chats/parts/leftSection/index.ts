@@ -15,7 +15,7 @@ class LeftSection extends Block {
 
     ChatController.getChats();
     store.on(StoreEvents.Updated, () => {
-      const { chats } = store.getState();
+      const { chats, activeChat } = store.getState();
 
       const chatList: any[] = [];
       chats.forEach((chat: any) => {
@@ -24,14 +24,13 @@ class LeftSection extends Block {
           subtitle: chat.subtitle,
           date: chat.time ? new Date(chat.time).getDate().toString() : '',
           newMessage: chat.unread_count,
-          active: false,
+          active: activeChat?.id === chat.id,
           chatId: chat.id,
           events: {
             click: () => {
               this.children.chatList.forEach((chatItem: any) => {
                 if (chat.id === chatItem.props.chatId) {
-                  chatItem.setProps({ active: true });
-                  store.set('activeChat', chat.id);
+                  store.set('activeChat', chat);
                   ChatController.getChatToketById(chat.id);
                 } else {
                   chatItem.setProps({ active: false });
@@ -74,7 +73,6 @@ class LeftSection extends Block {
               ?.then(() => {
                 event.target.form[0].value = null;
                 event.target.form[0].labels[0].classList.remove('active');
-
               })
           }
         }

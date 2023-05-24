@@ -14,14 +14,30 @@ class ChatApi extends BaseAPI {
             { headers: { 'content-type': 'application/json' } })
     }
 
+    getChatUsers(chatId: number) {
+        return new HTTPTransport().get(`${BASE_CHAT_API}/${chatId}/users`,
+            { data: { id: chatId }, headers: { 'content-type': 'application/json' } });
+    }
+
     create(title: string) {
         return new HTTPTransport().post(BASE_CHAT_API,
-            {data: {title}, headers: { 'content-type': 'application/json' } })
+            { data: { title }, headers: { 'content-type': 'application/json' } })
+    }
+
+    addUsers(users: number[], chatId: number) {
+        return new HTTPTransport().put(BASE_CHAT_API,
+            { data: { chatId, users }, headers: { 'content-type': 'application/json' } })
     }
 
     delete(chatId: number) {
         return new HTTPTransport().delete(BASE_CHAT_API,
-            {data: {chatId}, headers: { 'content-type': 'application/json' }})
+            { data: { chatId }, headers: { 'content-type': 'application/json' } })
+    }
+
+    deleteUser(chatId: number, users: number[]) {
+        return new HTTPTransport().delete(BASE_CHAT_API,
+            { data: { chatId, users }, headers: { 'content-type': 'application/json' } })
+            ?.then(() => this.getChatUsers(chatId))
     }
 }
 
