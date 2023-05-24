@@ -1,5 +1,14 @@
 <nav class={{chat__nav}}>
     <div class={{nav__avatar}}></div>
     <span class={{nav__name}}>{{name}}</span>
-    <span class={{nav__dots}}>.</span>
+    <span class={{nav__dots}}>{{{dots}}}</span>
+
+    <div class={{modal}}>
+        {{{buttonAdd}}}
+        <ul>
+            {{#each usersProfiles}}
+                {{{this}}}
+            {{/each}}
+        </ul>
+    </div>
 </nav>
