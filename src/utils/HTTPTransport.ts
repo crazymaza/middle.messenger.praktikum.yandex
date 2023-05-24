@@ -63,7 +63,7 @@ class HTTPTransport {
         options: Options = { method: Methods.GET },
         timeout = 5000
     ) => {
-        const { method, data, headers = { 'content-type': 'application/json' } } = options;
+        const { method, data, headers } = options;
         if (typeof url !== 'string') return;
         if (method === undefined) return;
         return new Promise((resolve, reject) => {

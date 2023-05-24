@@ -4,7 +4,7 @@ import { BaseAPI } from "./base-api";
 
 class ChatApi extends BaseAPI {
     getChat() {
-        return new HTTPTransport().get(`${API_URL}/chats`, {});
+        return new HTTPTransport().get(`${API_URL}/chats`, {headers: { 'content-type': 'application/json' }});
     }
 }
 

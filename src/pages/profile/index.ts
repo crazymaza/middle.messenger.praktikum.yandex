@@ -18,7 +18,6 @@ import Link from '../../components/link';
 import InputFile from '../../components/inputs/file';
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
-import { UserApi } from '../../api/user-api';
 
 const getFields = (): ProfileInput[] | {
   fields1: ProfileField[];
@@ -117,6 +116,7 @@ class Profile extends Block {
       isImg: true,
       value: '',
       name: 'avatar',
+      labelClass: classes.profile__avatar
     });
 
     AuthController.getUser()?.then(
@@ -125,6 +125,7 @@ class Profile extends Block {
         field.forEach((item) => {
           item.setProps({ value: data[item.props.label || item.props.name] })
         })
+        this.setProps({profileName: data.first_name});
         avatar.setProps({ value: data.avatar ? `https://ya-praktikum.tech/api/v2/resources${data.avatar}` : avatarTmp });
       }
     )

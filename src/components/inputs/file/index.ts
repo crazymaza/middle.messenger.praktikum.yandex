@@ -6,6 +6,7 @@ interface InputFileInterface {
   value: string,
   isImg?: boolean,
   name?: string,
+  labelClass?: string,
 }
 
 class InputFile extends Block {
