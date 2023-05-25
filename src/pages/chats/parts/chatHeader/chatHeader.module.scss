@@ -1,4 +1,4 @@
-@use "../../../../style.scss" as v;
+@use "../../../../style.scss"as v;
 
 .chat__nav {
     display: flex;
@@ -33,7 +33,7 @@
                 padding: 5px;
                 background: none;
                 margin: 0;
-                color: currentColor;
+                color: currentcolor;
                 font-size: 20px;
             }
 
@@ -53,24 +53,18 @@
                 bottom: 0;
             }
         }
-    }
-    .modal {
-        position: absolute;
-        top: 70px;
-        right: 10px;
-        width: 200px;
-        height: 200px;
-        background-color: antiquewhite;
-        z-index: 30;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 5px;
-        border-radius: 10px;
 
-        button {
-            padding: 5px;
-            max-width: 150px;
+        &__buttons {
+            display: flex;
+            gap: 5px;
+
+            button {
+                padding: 5px;
+                max-width: 50px;
+                width: 30px;
+                height: 30px;
+                margin: 0;
+            }
         }
     }
 }

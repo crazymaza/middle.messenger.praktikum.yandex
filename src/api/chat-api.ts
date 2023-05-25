@@ -25,8 +25,8 @@ class ChatApi extends BaseAPI {
     }
 
     addUsers(users: number[], chatId: number) {
-        return new HTTPTransport().put(BASE_CHAT_API,
-            { data: { chatId, users }, headers: { 'content-type': 'application/json' } })
+        return new HTTPTransport().put(`${BASE_CHAT_API}/users`,
+            { data: { users, chatId }, headers: { 'content-type': 'application/json' } })
     }
 
     delete(chatId: number) {
@@ -35,7 +35,7 @@ class ChatApi extends BaseAPI {
     }
 
     deleteUser(chatId: number, users: number[]) {
-        return new HTTPTransport().delete(BASE_CHAT_API,
+        return new HTTPTransport().delete(`${BASE_CHAT_API}/users`,
             { data: { chatId, users }, headers: { 'content-type': 'application/json' } })
             ?.then(() => this.getChatUsers(chatId))
     }

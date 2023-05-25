@@ -2,13 +2,8 @@
     <div class={{nav__avatar}}></div>
     <span class={{nav__name}}>{{name}}</span>
     <span class={{nav__dots}}>{{{dots}}}</span>
-
-    <div class={{modal}}>
+    <div class={{nav__buttons}}>
         {{{buttonAdd}}}
-        <ul>
-            {{#each usersProfiles}}
-                {{{this}}}
-            {{/each}}
-        </ul>
+        {{{buttonDelete}}}
     </div>
 </nav>

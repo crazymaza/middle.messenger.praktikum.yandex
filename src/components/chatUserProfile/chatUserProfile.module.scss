@@ -12,7 +12,7 @@
         transition: all 0.3s ease;
 
         &:hover {
-            background-color: rgb(168, 217, 242);
+            background-color: rgb(168 217 242);
         }
     }
 
@@ -63,6 +63,25 @@
         color: v.$button-text;
     }
 
+    &__delete {
+        position: absolute;
+        top: 0;
+        right: -50px;
+        width: 50px;
+        height: 100%;
+        background-color: #ff3a3a;
+        transition: all 0.3s ease-in;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+
+        button {
+            background: url("../../img/trash.svg") center bottom no-repeat;
+            max-width: 50px;
+            padding: 25px;
+            margin: 0;
+        }
+    }
+
     &__list {
         &_item {
             transition: all 0.3s ease;
@@ -72,6 +91,7 @@
 
             &:hover {
                 background-color: adjust(v.$background, 2%);
+
                 .chat__delete {
                     right: 0;
                 }
@@ -86,24 +106,6 @@
             &_active {
                 background-color: #5296f5;
             }
-        }
-    }
-    &__delete {
-        position: absolute;
-        top: 0;
-        right: -50px;
-        width: 50px;
-        height: 100%;
-        background-color: #ff3a3a;
-        transition: all 0.3s ease-in;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-
-        button {
-            background: url(../../img/trash.svg) center bottom no-repeat;
-            max-width: 50px;
-            padding: 25px;
-            margin: 0;
         }
     }
 }
