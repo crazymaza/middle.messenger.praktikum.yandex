@@ -12,6 +12,8 @@ const enum Methods {
     DELETE = "DELETE",
 }
 
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown> | undefined;
+
 const queryStringify = (data: Record<string, any>): string => {
     if (typeof data !== 'object') {
         throw new Error('Data must be object');
@@ -23,7 +25,7 @@ const queryStringify = (data: Record<string, any>): string => {
 
 class HTTPTransport {
 
-    get = (url: string, options: Options) => {
+    get: HTTPMethod = (url, options = {}) => {
         const { data } = options;
         if (data)`${url}${queryStringify(data)}`;
 
@@ -34,7 +36,7 @@ class HTTPTransport {
         );
     };
 
-    put = (url: string, options: Options) => {
+    put: HTTPMethod = (url, options = {}) => {
         return this.request(
             url,
             { ...options, method: Methods.PUT },
@@ -42,7 +44,7 @@ class HTTPTransport {
         );
     };
 
-    post = (url: string, options: Options) => {
+    post: HTTPMethod = (url, options = {}) => {
         return this.request(
             url,
             { ...options, method: Methods.POST },
@@ -50,7 +52,7 @@ class HTTPTransport {
         );
     };
 
-    delete = (url: string, options: Options) => {
+    delete: HTTPMethod = (url, options = {}) => {
         return this.request(
             url,
             { ...options, method: Methods.DELETE },
@@ -60,7 +62,7 @@ class HTTPTransport {
 
     request = (
         url: string,
-        options: Options = { method: Methods.GET },
+        options: Options,
         timeout = 5000
     ) => {
         const { method, data, headers } = options;
