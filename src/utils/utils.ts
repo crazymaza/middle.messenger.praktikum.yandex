@@ -16,7 +16,7 @@ function renderDom(query: string, block: Block) {
 
 export default renderDom;
 
-export const getAllFormData = (event: Event): RegisterFormDataInterface => {
+export const getAllFormData = (event: Event, formName: string): RegisterFormDataInterface => {
   event.preventDefault();
   const result: RegisterFormDataInterface = {
     first_name: '',
@@ -26,7 +26,8 @@ export const getAllFormData = (event: Event): RegisterFormDataInterface => {
     password: '',
     phone: ''
   };
-  const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input');
+  const form = document.forms.namedItem(formName);
+  const inputs: NodeListOf<HTMLInputElement> = form?.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
   inputs.forEach(input => result[input.name as keyof RegisterFormDataInterface] = input.value || input.defaultValue);
   return result;
 }
@@ -47,15 +48,20 @@ export const checkInput = (event: Event, rules: { [key: string]: any }) => {
   return errorElement ? errorElement.textContent = '' : null;
 }
 
-export const checkSubmitForm = (event: Event): RegisterFormDataInterface | undefined => {
+export const checkSubmitForm = (event: Event, formName: string): RegisterFormDataInterface | undefined => {
   event.preventDefault();
-  const isAllInputBlank = Array.from(document.getElementsByTagName('input'))
+  const form = document.forms.namedItem(formName);
+  if (!form) {
+    alert('Форма для заполнения не найдена.')
+    return;
+  }
+  const isAllInputBlank = Array.from(form.getElementsByTagName('input'))
     .filter(item => !item.hidden)
     .every((element: HTMLInputElement) => element.value !== '');
-  const isAllErrotExist = Array.from(document.querySelectorAll('input + span'))
+  const isAllErrotExist = Array.from(form.querySelectorAll('input + span'))
     .every((item: HTMLSpanElement) => item.textContent === '');
   if (isAllErrotExist && isAllInputBlank) {
-    return getAllFormData(event);
+    return getAllFormData(event, formName);
   }
   alert('Не заполнены все поля')
 }
@@ -120,4 +126,12 @@ export const set = (state: Indexed | unknown, path: string, value: unknown): Ind
 
 export const isEqual = (a: object, b: object): boolean => {
   return Object.entries(a).toString() === Object.entries(b).toString();
+}
+
+export const parseJson = (jsonString: string) => {
+  try {
+    return JSON.parse(jsonString);
+  } catch (err) {
+    alert('Не получилось обработать ответ на запрос')
+  }
 }

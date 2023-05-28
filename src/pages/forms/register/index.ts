@@ -46,7 +46,7 @@ class Signup extends Block {
       type: 'submit',
       events: {
         click: (event: Event) => {
-          const registerFormData: RegisterFormDataInterface | undefined = checkSubmitForm(event);
+          const registerFormData: RegisterFormDataInterface | undefined = checkSubmitForm(event, 'register');
           if (registerFormData) {
             const dataWithoutComfirmPass = Object.keys(registerFormData)
               .filter((key: string) => key !== 'password_confirm')

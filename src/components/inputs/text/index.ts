@@ -6,7 +6,7 @@ interface InputProps {
   name: string;
   label: string;
   type: string;
-  events: {
+  events?: {
     change?: (event: Event) => void;
     input?: (event: Event) => void;
   };

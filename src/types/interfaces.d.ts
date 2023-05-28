@@ -9,6 +9,7 @@ export interface ItemDataInterface {
     newMessage: number,
     chatId: number,
     active?: boolean,
+    avatarPath?: string,
     events?: {[key: string]: () => void}
 }
 

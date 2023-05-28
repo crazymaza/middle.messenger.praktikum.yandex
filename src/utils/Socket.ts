@@ -1,4 +1,5 @@
 import messagesController from "../controllers/MessageController";
+import { parseJson } from "./utils";
 
 interface WebSocketProps {
   userId: string;
@@ -13,7 +14,7 @@ class Socket {
   chatId: string;
 
   constructor({ userId, chatId, token }: WebSocketProps) {
-    this._baseUrl = "wss://ya-praktikum.tech/ws/";
+    this._baseUrl = "wss://ya-praktikum.tech/ws";
     this._chatsUrl = `${this._baseUrl}/chats`;
     this.chatId = chatId;
     this.socket = new WebSocket(
@@ -21,8 +22,14 @@ class Socket {
     );
   }
 
+  private isOpen(ws: WebSocket) { return ws.readyState === ws.OPEN }
+
   public send(message: string) {
-    this.socket.send(JSON.stringify(message));
+    if (this.isOpen(this.socket)) {
+      this.socket.send(JSON.stringify(message));
+    } else {
+      console.log('Closed...')
+    }
   }
 
   public open() {
@@ -51,7 +58,7 @@ class Socket {
 
   public message() {
     this.socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
+      const data = parseJson(event.data);
 
       if (data.type !== "user connected") {
         messagesController.addMessage(data, this.chatId);

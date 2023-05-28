@@ -1,17 +1,20 @@
 import { UserApi } from "../api/user-api"
 import store from "../utils/store"
+import { parseJson } from "../utils/utils"
 
 class UserController {
     getUserAndSave = () => {
         return UserApi.getUser()
-            ?.then((data: any) => store.set('user', JSON.parse(data.response)))
+            ?.then((data: any) => store.set('user', parseJson(data.response)))
     }
 
     changeProfile = (data: any) => {
         const filteredData = Object.keys(data).filter(key => key !== '' && key !== 'password' && key !== 'avatar')
             .reduce((acc, curr) => ({ ...acc, [curr]: data[curr] }), {});
-        UserApi.changeProfile(filteredData)
-            ?.then((data: any) => store.set('user', JSON.parse(data.response)))
+        return UserApi.changeProfile(filteredData)
+            ?.then((data: any) => {store.set('user', parseJson(data.response))
+            return data;
+        })
     }
 
     changePassword = (data: any) => {
@@ -23,7 +26,7 @@ class UserController {
     }
 
     changeAvatar = (data: any) => {
-        UserApi.changeAvatar(data)
+       return UserApi.changeAvatar(data)
     }
 }
 export default new UserController();

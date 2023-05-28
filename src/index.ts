@@ -34,8 +34,8 @@ router
   .start()
 
 // ==== Login form ====
-const inputs: NodeListOf<Element> = document.querySelectorAll('.formInputs input');
-const labels: NodeListOf<Element> = document.querySelectorAll('.formInputs label');
+const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('.formInputs input');
+const labels: NodeListOf<HTMLLabelElement> = document.querySelectorAll('.formInputs label');
 
 inputs.forEach((input: HTMLInputElement) => input.addEventListener('change', () => {
   labels.forEach((label: HTMLLabelElement) => {

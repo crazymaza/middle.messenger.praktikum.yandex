@@ -4,35 +4,43 @@ import { SignupApi } from "../api/signup-api";
 import { UserApi } from "../api/user-api";
 import { LoginFormDataInterface, RegisterFormDataInterface } from "../types/interfaces";
 import { CHATS_1_PATH } from "../utils/constants";
+import { parseJson } from "../utils/utils";
 import UserController from "./UserController";
 
 class AuthController {
     authUser = (data: LoginFormDataInterface) => {
         const expectedData = Object.keys(data)
             .reduce((acc, curr: keyof LoginFormDataInterface) => ({ ...acc, [curr]: data[curr] }), {});
-        new SugninApi().create(expectedData as LoginFormDataInterface)
+        new SugninApi().create(expectedData as unknown as LoginFormDataInterface)
             ?.then((response: any) => {
                 if (response.status !== 200) {
-                    throw new Error(JSON.parse(response.response).reason)
+                    throw new Error(parseJson(response.response).reason)
                 }
+                UserController.getUserAndSave();
                 router.go(CHATS_1_PATH);
-                // UserController.getUserAndSave();
             })
-            .catch((err) => alert(err.message))
+            .catch((err) => {
+                if (err.message === "User already in system") {
+                    UserController.getUserAndSave();
+                    router.go(CHATS_1_PATH);
+                } else {
+                    alert(err.message)
+                }
+            })
     }
 
     registerUser = (data: RegisterFormDataInterface) => {
         new SignupApi().create(data)
             ?.then((data: any) => {
                 if (data.status !== 200) {
-                    throw new Error(JSON.parse(data.response).reason)
+                    throw new Error(parseJson(data.response).reason)
                 }
-                return JSON.parse(data.response)
+                return parseJson(data.response);
             })
             .then(({ id }: { id: number }) => {
                 if (typeof id === 'number') {
-                    router.go(CHATS_1_PATH);
-                    UserController.getUserAndSave();
+                    UserController.getUserAndSave()
+                    router.go(CHATS_1_PATH)
                 }
             })
             .catch((err) => alert(err.message))
@@ -40,7 +48,7 @@ class AuthController {
 
     getUser = () => {
         return UserApi.getUser()
-            ?.then((data: any) => JSON.parse(data.response))
+            ?.then((data: any) => parseJson(data.response))
     }
 
     logout = () => UserApi.logout();

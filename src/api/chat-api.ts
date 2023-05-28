@@ -10,7 +10,7 @@ class ChatApi extends BaseAPI {
     }
 
     getChatToken(id: number) {
-        return new HTTPTransport().post(`${BASE_CHAT_API}/token/id`,
+        return new HTTPTransport().post(`${BASE_CHAT_API}/token/${id}`,
             { headers: { 'content-type': 'application/json' } })
     }
 

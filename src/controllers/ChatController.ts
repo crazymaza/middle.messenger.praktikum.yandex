@@ -1,20 +1,20 @@
-import { router } from "..";
 import chatApi from "../api/chat-api";
 import store from "../utils/store";
+import { parseJson } from "../utils/utils";
 
 class ChatController {
     getChats = () => {
         return chatApi.getChat()?.then((response: { response: string }) => {
-            store.set("chats", JSON.parse(response.response));
+            store.set("chats", parseJson(response.response));
         });
     }
 
     getChatToketById = (id: number) => {
         return chatApi.getChatToken(id)
             ?.then((resp: { response: string }) => {
-                return JSON.parse(resp.response)
+                store.set('chatToken', parseJson(resp.response))
+                return parseJson(resp.response);
             })
-            // .then(({ token }) => store.set("activeChatToken", token))
     }
 
     getChatUsers = (chatId: number) => {

@@ -23,6 +23,13 @@
         border-radius: 50%;
         background-color: v.$background;
         margin-right: 10px;
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            aspect-ratio: 1;
+        }
     }
 
     &__title {

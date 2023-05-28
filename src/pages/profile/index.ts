@@ -5,19 +5,21 @@ import Block from '../../utils/block';
 import ProfileField from '../../components/profileField';
 import Button from '../../components/button';
 import ProfileInput from '../../components/profileInput';
-import { checkInput, checkSubmitForm, clearError, getAllFormData } from '../../utils/utils';
+import { checkInput, checkSubmitForm, clearError, getAllFormData, parseJson } from '../../utils/utils';
 import {
   profileFields,
   rules,
   PASSWORD_SETTING_PATH,
   PROFILE_SETTING_PATH,
-  CHATS_1_PATH
+  CHATS_1_PATH,
+  RESOURCES_URL
 } from '../../utils/constants';
 import { router } from '../..';
 import Link from '../../components/link';
 import InputFile from '../../components/inputs/file';
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
+import store from '../../utils/store';
 
 const getFields = (): ProfileInput[] | {
   fields1: ProfileField[];
@@ -111,24 +113,45 @@ class Profile extends Block {
       fields1: ProfileField[];
       fields2: ProfileField[];
     } = getFields();
-
-    const avatar = new InputFile({
+    const formName = Array.isArray(fields) ? 'profileChange' : 'profile';
+    const avatar1 = new InputFile({
       isImg: true,
       value: '',
-      name: 'avatar',
+      name: 'avatar1',
       labelClass: classes.profile__avatar
     });
 
-    AuthController.getUser()?.then(
-      (data: any) => {
-        const field = Array.isArray(fields) ? fields : fields.fields1
-        field.forEach((item) => {
-          item.setProps({ value: data[item.props.label || item.props.name] })
-        })
-        this.setProps({profileName: data.first_name});
-        avatar.setProps({ value: data.avatar ? `https://ya-praktikum.tech/api/v2/resources${data.avatar}` : avatarTmp });
-      }
-    )
+    const avatar2 = new InputFile({
+      isImg: true,
+      value: '',
+      name: 'avatar2',
+      labelClass: classes.profile__avatar
+    })
+    let profileName = '';
+    const { user } = store.getState();
+    if (!user) {
+      AuthController.getUser()?.then(
+        (data: any) => {
+          const field = Array.isArray(fields) ? fields : fields.fields1
+          field.forEach((item) => {
+            item.setProps({ value: data[item.props.label || item.props.name] })
+          })
+          this.setProps({ profileName: data.first_name });
+          avatar1.setProps({ value: data.avatar ? `${RESOURCES_URL}${data.avatar}` : avatarTmp });
+          avatar2.setProps({ value: data.avatar ? `${RESOURCES_URL}${data.avatar}` : avatarTmp });
+        }
+      )
+    } else {
+      const field = Array.isArray(fields) ? fields : fields.fields1
+      field.forEach((item) => {
+        item.setProps({ value: user[item.props.label || item.props.name] })
+      })
+      profileName = user.first_name;
+      avatar1.setProps({ value: user.avatar ? `${RESOURCES_URL}${user.avatar}` : avatarTmp });
+      avatar2.setProps({ value: user.avatar ? `${RESOURCES_URL}${user.avatar}` : avatarTmp });
+    }
+
+
 
     super('form', {
       ...props,
@@ -144,29 +167,44 @@ class Profile extends Block {
           text: 'Сохранить', type: 'submit',
           events: {
             click: (event: Event) => {
-              checkSubmitForm(event);
+              checkSubmitForm(event, formName);
 
-              const data = getAllFormData(event);
+              const data = getAllFormData(event, formName);
               if (Object.hasOwn(data, 'oldPassword')) {
                 UserController.changePassword(data);
                 return;
               }
-              if (Object.hasOwn(data, 'avatar') && data.avatar) {
-                const avatarElem = document.querySelector('input[name=avatar]') as HTMLInputElement
-                if (avatarElem && avatarElem.files) {
+              if (Object.hasOwn(data, 'avatar2') && data.avatar2) {
+                const avatarElem = document.querySelector('input[name=avatar2]') as HTMLInputElement
+                if (avatarElem && avatarElem.files?.length) {
                   const formData = new FormData();
-                  formData.append("avatar", avatarElem.files[0]);
-                  UserController.changeAvatar(formData);
+                  formData.append('avatar', avatarElem.files[0]);
+                  UserController.changeAvatar(formData)
+                    ?.then((resp: { status: number, avatar: string }) => {
+                      if (resp.status === 200) {
+                        const avatarImgs: NodeListOf<HTMLImageElement> =
+                          document.querySelectorAll(`.${classes.profile__avatar}>img`) as NodeListOf<HTMLImageElement>;
+                        avatarImgs.forEach((img: HTMLImageElement) => img.src = URL.createObjectURL(formData.get('avatar') as File));
+                      }
+                    })
                 }
               }
-              UserController.changeProfile(data);
+              UserController.changeProfile(data)
+              ?.then(resp => {
+                if(resp.status === 200) {
+                  const data = parseJson(resp.response);
+                  this.setProps({profileName: data.first_name})
+                }
+              });
             }
           }
         })
         : fields.fields2[0],
       changePassword: Array.isArray(fields) ? null : fields.fields2[1],
       exit: Array.isArray(fields) ? null : fields.fields2[2],
-      avatar,
+      avatar: Array.isArray(fields) ? avatar2 : avatar1,
+      formName,
+      profileName,
       button: new Button({
         text: '&larr;',
         hasSymbol: true,

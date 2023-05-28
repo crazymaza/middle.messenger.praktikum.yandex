@@ -12,12 +12,9 @@ class ChatHeader extends Block {
       text: '+',
       type: 'button',
       events: {
-        click: (event) => {
-          const { activeChat } = store.getState();
-          event.preventDefault();
-          ChatController.addUsersToChat([973928], activeChat?.id)
-            ?.then(() => alert('В чат добавлен пользователь'))
-            .catch(() => alert('Не удалось добавить пользователя'))
+        click: () => {
+          store.set('modal', 'add');
+          document.querySelector('#modal')?.classList.add('activeModal');
         }
       }
     })
@@ -27,11 +24,9 @@ class ChatHeader extends Block {
       type: 'button',
       events: {
         click: (event) => {
-          const { activeChat } = store.getState();
+          store.set('modal', 'remove');
+          document.querySelector('#modal')?.classList.add('activeModal');
           event.preventDefault();
-          ChatController.deleteUser(activeChat?.id, [973928])
-            ?.then(() => alert('Пользователь удалён из чата'))
-            .catch(() => alert('Не удалось удалить пользователя'))
         }
       }
     })

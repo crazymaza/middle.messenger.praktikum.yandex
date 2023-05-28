@@ -19,9 +19,9 @@ export class UserApi extends BaseAPI {
         return new HTTPTransport().put(`${API_URL}/user/password`, { data, headers: { 'content-type': 'application/json'  }})
     }
 
-    static changeAvatar = (data: any) => {
+    static changeAvatar = (data: FormData) => {
         return new HTTPTransport().put(`${API_URL}/user/profile/avatar`, {
-            data,
+            data
         })
     }
 }

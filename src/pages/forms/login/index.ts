@@ -45,7 +45,7 @@ class Signin extends Block {
       type: 'submit',
       events: {
         click: (event: Event) => {
-          const registerFormData: LoginFormDataInterface | undefined = checkSubmitForm(event);
+          const registerFormData: LoginFormDataInterface | undefined = checkSubmitForm(event, 'login');
           if (registerFormData) {
               AuthController.authUser(registerFormData);
           }
