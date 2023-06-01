@@ -16,12 +16,10 @@ class AuthController {
                 if (response.status !== 200) {
                     throw new Error(parseJson(response.response).reason)
                 }
-                UserController.getUserAndSave();
                 router.go(CHATS_1_PATH);
             })
             .catch((err) => {
                 if (err.message === "User already in system") {
-                    UserController.getUserAndSave();
                     router.go(CHATS_1_PATH);
                 } else {
                     alert(err.message)
@@ -39,7 +37,7 @@ class AuthController {
             })
             .then(({ id }: { id: number }) => {
                 if (typeof id === 'number') {
-                    UserController.getUserAndSave()
+                    // UserController.getUserAndSave()
                     router.go(CHATS_1_PATH)
                 }
             })

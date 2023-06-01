@@ -1,4 +1,5 @@
 import chatApi from "../api/chat-api";
+import { ChatInerface } from "../types/interfaces";
 import store from "../utils/store";
 import { parseJson } from "../utils/utils";
 
@@ -9,11 +10,15 @@ class ChatController {
         });
     }
 
-    getChatToketById = (id: number) => {
-        return chatApi.getChatToken(id)
+    getChatToketById = (chat: ChatInerface) => {
+        return chatApi.getChatToken(chat.id)
             ?.then((resp: { response: string }) => {
                 store.set('chatToken', parseJson(resp.response))
                 return parseJson(resp.response);
+            })
+            .then((data) => {
+                store.set('activeChat', chat);
+                return data;
             })
     }
 

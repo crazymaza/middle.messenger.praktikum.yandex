@@ -5,6 +5,7 @@ import type { ItemDataInterface } from '../../types/interfaces';
 import Block from '../../utils/block';
 import Button from '../button';
 import ChatController from '../../controllers/ChatController';
+import store from '../../utils/store';
 
 Handlebars.registerPartial('dots', (value) => {
   const stringText = String(value);

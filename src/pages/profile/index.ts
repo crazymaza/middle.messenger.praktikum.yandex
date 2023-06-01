@@ -20,6 +20,7 @@ import InputFile from '../../components/inputs/file';
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
 import store from '../../utils/store';
+import ChatController from '../../controllers/ChatController';
 
 const getFields = (): ProfileInput[] | {
   fields1: ProfileField[];
@@ -190,12 +191,12 @@ class Profile extends Block {
                 }
               }
               UserController.changeProfile(data)
-              ?.then(resp => {
-                if(resp.status === 200) {
-                  const data = parseJson(resp.response);
-                  this.setProps({profileName: data.first_name})
-                }
-              });
+                ?.then(resp => {
+                  if (resp.status === 200) {
+                    const data = parseJson(resp.response);
+                    this.setProps({ profileName: data.first_name })
+                  }
+                });
             }
           }
         })
@@ -210,7 +211,10 @@ class Profile extends Block {
         hasSymbol: true,
         type: 'button',
         events: {
-          click: () => router.go(CHATS_1_PATH)
+          click: () => { 
+            router.go(CHATS_1_PATH);
+            ChatController.getChats();
+          }
         }
       }),
     });

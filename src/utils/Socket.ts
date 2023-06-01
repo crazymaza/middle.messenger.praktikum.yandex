@@ -60,7 +60,7 @@ class Socket {
     this.socket.onmessage = (event) => {
       const data = parseJson(event.data);
 
-      if (data.type !== "user connected") {
+      if (data?.type !== "user connected") {
         messagesController.addMessage(data, this.chatId);
       }
     };

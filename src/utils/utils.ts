@@ -85,8 +85,8 @@ export const trim = (string: string, chars?: string): string => {
   return string.replace(reg, "");
 }
 
-const isObject = (item: Indexed<any>): boolean => {
-  return (item && typeof item === 'object' && !Array.isArray(item) && item !== null);
+export function isObject(value: unknown): value is Indexed {
+  return Object.prototype.toString.call(value) === '[object Object]';
 }
 
 export const merge = (lhs: Indexed<any>, rhs: Indexed<any>): Indexed => {
@@ -109,19 +109,26 @@ export const merge = (lhs: Indexed<any>, rhs: Indexed<any>): Indexed => {
   return lhs;
 }
 
-export const set = (state: Indexed | unknown, path: string, value: unknown): Indexed | unknown => {
-  if (typeof state !== 'object' || state === null) {
-    return state;
+export function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+  if (!isObject(object)) {
+    return object;
   }
 
-  if (typeof path !== 'string') {
-    throw new Error('path must be string');
-  }
+  const pathArray = path.split('.');
 
-  const result = path.split('.').reduceRight<Indexed>((acc, key) => ({
-    [key]: acc,
-  }), value as any);
-  return merge(state as Indexed, result);
+  pathArray.reduce((acc: Indexed, key: string, idx: number) => {
+    if (idx === pathArray.length - 1) {
+      acc[key] = value;
+    }
+
+    if (acc[key] === undefined) {
+      acc[key] = {};
+    }
+
+    return acc[key] as Indexed;
+  }, object as Indexed)
+
+  return object;
 }
 
 export const isEqual = (a: object, b: object): boolean => {

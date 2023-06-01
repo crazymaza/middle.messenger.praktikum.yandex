@@ -11,20 +11,28 @@ import leftSectionTemplate from './leftSection.hbs';
 import * as classes from './leftSection.module.scss';
 import avatarTmp from '../../../../img/avatarTmp.png';
 import Socket from '../../../../utils/Socket';
+import UserController from '../../../../controllers/UserController';
+import { ChatInerface } from '../../../../types/interfaces';
 
 class LeftSection extends Block {
   constructor(props: Record<string, any> = {}) {
+    const { chats, user } = store.getState();
+    if (!user) {
+      UserController.getUserAndSave();
+    }
+    if (!chats) {
+      ChatController.getChats();
+    }
 
-    ChatController.getChats();
     store.on(StoreEvents.Updated, () => {
-      const { chats, activeChat, user } = store.getState();
+      const { chats, activeChat, user, socket } = store.getState();
 
       const chatList: any[] = [];
-      chats?.forEach((chat: any) => {
+      chats?.forEach((chat: ChatInerface) => {
         chatList.push(new ChatListItem({
           title: chat.title,
-          subtitle: chat?.last_message?.content,
-          date: chat.last_message.time ? new Date(chat.last_message.time).toLocaleString() : '',
+          subtitle: chat?.last_message?.content || '',
+          date: chat?.last_message?.time ? new Date(chat.last_message.time).toLocaleString() : '',
           newMessage: chat.unread_count,
           active: activeChat?.id === chat.id,
           chatId: chat.id,
@@ -33,21 +41,20 @@ class LeftSection extends Block {
             click: () => {
               this.children.chatList.forEach((chatItem: any) => {
                 if (chat.id === chatItem.props.chatId) {
-                  ChatController.getChatToketById(chat.id)?.then((data) => {
-                    store.set('activeChat', chat);
-                    return data;
-                  })
-                    .then((resp: any) => {
-                      const socket = new Socket({
-                        chatId: chat?.id,
-                        token: resp.token,
-                        userId: user?.id
-                      });
-                      socket.open();
-                      store.set('socket', socket);
+                  ChatController.getChatToketById(chat)
+                    ?.then((resp: any) => {
+                      if (!socket?.chat_id) {
+                        const socket = new Socket({
+                          chatId: `${chat?.id}`,
+                          token: resp.token,
+                          userId: user?.id
+                        });
+                        socket.open();
+                        store.set('socket', socket);
+                      }
                     })
                 } else {
-                  chatItem.setProps({ active: false });
+                  socket?.close()
                 }
               })
             }
