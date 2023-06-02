@@ -168,35 +168,36 @@ class Profile extends Block {
           text: 'Сохранить', type: 'submit',
           events: {
             click: (event: Event) => {
-              checkSubmitForm(event, formName);
-
-              const data = getAllFormData(event, formName);
-              if (Object.hasOwn(data, 'oldPassword')) {
-                UserController.changePassword(data);
-                return;
-              }
-              if (Object.hasOwn(data, 'avatar2') && data.avatar2) {
-                const avatarElem = document.querySelector('input[name=avatar2]') as HTMLInputElement
-                if (avatarElem && avatarElem.files?.length) {
-                  const formData = new FormData();
-                  formData.append('avatar', avatarElem.files[0]);
-                  UserController.changeAvatar(formData)
-                    ?.then((resp: { status: number, avatar: string }) => {
-                      if (resp.status === 200) {
-                        const avatarImgs: NodeListOf<HTMLImageElement> =
-                          document.querySelectorAll(`.${classes.profile__avatar}>img`) as NodeListOf<HTMLImageElement>;
-                        avatarImgs.forEach((img: HTMLImageElement) => img.src = URL.createObjectURL(formData.get('avatar') as File));
-                      }
-                    })
+              const allOk = checkSubmitForm(event, formName);
+              if (allOk) {
+                const data = getAllFormData(event, formName);
+                if (Object.hasOwn(data, 'oldPassword')) {
+                  UserController.changePassword(data);
+                  return;
                 }
-              }
-              UserController.changeProfile(data)
-                ?.then(resp => {
-                  if (resp.status === 200) {
-                    const data = parseJson(resp.response);
-                    this.setProps({ profileName: data.first_name })
+                if (Object.hasOwn(data, 'avatar2') && data.avatar2) {
+                  const avatarElem = document.querySelector('input[name=avatar2]') as HTMLInputElement
+                  if (avatarElem && avatarElem.files?.length) {
+                    const formData = new FormData();
+                    formData.append('avatar', avatarElem.files[0]);
+                    UserController.changeAvatar(formData)
+                      ?.then((resp: { status: number, avatar: string }) => {
+                        if (resp.status === 200) {
+                          const avatarImgs: NodeListOf<HTMLImageElement> =
+                            document.querySelectorAll(`.${classes.profile__avatar}>img`) as NodeListOf<HTMLImageElement>;
+                          avatarImgs.forEach((img: HTMLImageElement) => img.src = URL.createObjectURL(formData.get('avatar') as File));
+                        }
+                      })
                   }
-                });
+                }
+                UserController.changeProfile(data)
+                  ?.then(resp => {
+                    if (resp.status === 200) {
+                      const data = parseJson(resp.response);
+                      this.setProps({ profileName: data.first_name })
+                    }
+                  });
+              }
             }
           }
         })
@@ -211,7 +212,7 @@ class Profile extends Block {
         hasSymbol: true,
         type: 'button',
         events: {
-          click: () => { 
+          click: () => {
             router.go(CHATS_1_PATH);
             ChatController.getChats();
           }

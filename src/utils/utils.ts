@@ -58,12 +58,15 @@ export const checkSubmitForm = (event: Event, formName: string): RegisterFormDat
   const isAllInputBlank = Array.from(form.getElementsByTagName('input'))
     .filter(item => !item.hidden)
     .every((element: HTMLInputElement) => element.value !== '');
-  const isAllErrotExist = Array.from(form.querySelectorAll('input + span'))
+  const isAllErrorExist = Array.from(form.querySelectorAll('input + span'))
     .every((item: HTMLSpanElement) => item.textContent === '');
-  if (isAllErrotExist && isAllInputBlank) {
+  const isAllProfileErrorExist = Array.from(form.querySelectorAll('label + span'))
+  .every((item: HTMLSpanElement) => item.textContent === '');
+  if (isAllErrorExist && isAllInputBlank && isAllProfileErrorExist) {
     return getAllFormData(event, formName);
   }
   alert('Не заполнены все поля')
+  return;
 }
 
 export const clearError = (event: Event) => {
@@ -87,26 +90,6 @@ export const trim = (string: string, chars?: string): string => {
 
 export function isObject(value: unknown): value is Indexed {
   return Object.prototype.toString.call(value) === '[object Object]';
-}
-
-export const merge = (lhs: Indexed<any>, rhs: Indexed<any>): Indexed => {
-  for (const p in rhs) {
-    if (!Object.hasOwn(rhs, p)) {
-      continue;
-    }
-
-    try {
-      if (rhs[p].constructor === Object) {
-        rhs[p] = merge(lhs[p] as Indexed, rhs[p] as Indexed);
-      } else {
-        lhs[p] = rhs[p];
-      }
-    } catch (e) {
-      lhs[p] = rhs[p];
-    }
-  }
-
-  return lhs;
 }
 
 export function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {

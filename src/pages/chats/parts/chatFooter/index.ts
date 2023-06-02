@@ -25,8 +25,9 @@ class ChatFooter extends Block {
           const { socket } = store.getState();
           const form: HTMLFormElement = document.forms.namedItem('messageForm') as HTMLFormElement;
           const messageInput: HTMLInputElement = document.querySelector('input[name=message]') as HTMLInputElement;
-          if (messageInput.value === '') {
+          if (messageInput.value.trim() === '') {
             document.getElementsByClassName(classes.error)[0].textContent = rules.message.message;
+            return;
           }
           socket.send({ content: messageInput.value, type: "message" });
           form.reset();
