@@ -1,4 +1,6 @@
+import { RegisterFormDataInterface } from '../types/interfaces';
 import type Block from './block';
+import { Indexed } from './store';
 
 function renderDom(query: string, block: Block) {
   const root = document.querySelector(query) as HTMLElement;
@@ -14,12 +16,20 @@ function renderDom(query: string, block: Block) {
 
 export default renderDom;
 
-const getAllFormData = (event: Event) => {
+export const getAllFormData = (event: Event, formName: string): RegisterFormDataInterface => {
   event.preventDefault();
-  const result: { [key: string]: string } = {};
-  const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input');
-  inputs.forEach(input => result[input.name] = input.value || input.defaultValue);
-  console.log(result);
+  const result: RegisterFormDataInterface = {
+    first_name: '',
+    second_name: '',
+    login: '',
+    email: '',
+    password: '',
+    phone: ''
+  };
+  const form = document.forms.namedItem(formName);
+  const inputs: NodeListOf<HTMLInputElement> = form?.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+  inputs.forEach(input => result[input.name as keyof RegisterFormDataInterface] = input.value || input.defaultValue);
+  return result;
 }
 
 export const checkInput = (event: Event, rules: { [key: string]: any }) => {
@@ -38,15 +48,25 @@ export const checkInput = (event: Event, rules: { [key: string]: any }) => {
   return errorElement ? errorElement.textContent = '' : null;
 }
 
-export const checkSubmitForm = (event: Event) => {
+export const checkSubmitForm = (event: Event, formName: string): RegisterFormDataInterface | undefined => {
   event.preventDefault();
-  const isAllInputBlank = Array.from(document.getElementsByTagName('input'))
+  const form = document.forms.namedItem(formName);
+  if (!form) {
+    alert('Форма для заполнения не найдена.')
+    return;
+  }
+  const isAllInputBlank = Array.from(form.getElementsByTagName('input'))
     .filter(item => !item.hidden)
     .every((element: HTMLInputElement) => element.value !== '');
-  const isAllErrotExist = Array.from(document.querySelectorAll('input + span'))
+  const isAllErrorExist = Array.from(form.querySelectorAll('input + span'))
     .every((item: HTMLSpanElement) => item.textContent === '');
-  isAllErrotExist && isAllInputBlank ?
-    getAllFormData(event) : alert('Не заполнены все поля')
+  const isAllProfileErrorExist = Array.from(form.querySelectorAll('label + span'))
+  .every((item: HTMLSpanElement) => item.textContent === '');
+  if (isAllErrorExist && isAllInputBlank && isAllProfileErrorExist) {
+    return getAllFormData(event, formName);
+  }
+  alert('Не заполнены все поля')
+  return;
 }
 
 export const clearError = (event: Event) => {
@@ -54,5 +74,54 @@ export const clearError = (event: Event) => {
   const errorElement = document.querySelector(`span[name=${target.name}]`);
   if (target.value === '' && errorElement) {
     errorElement.textContent = '';
+  }
+}
+
+export const isEqualString = (first: string, second: string): boolean => first === second;
+
+export const trim = (string: string, chars?: string): string => {
+  if (string && !chars) {
+    return string.trim();
+  }
+
+  const reg = new RegExp(`[${chars}]`, "gi");
+  return string.replace(reg, "");
+}
+
+export function isObject(value: unknown): value is Indexed {
+  return Object.prototype.toString.call(value) === '[object Object]';
+}
+
+export function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+  if (!isObject(object)) {
+    return object;
+  }
+
+  const pathArray = path.split('.');
+
+  pathArray.reduce((acc: Indexed, key: string, idx: number) => {
+    if (idx === pathArray.length - 1) {
+      acc[key] = value;
+    }
+
+    if (acc[key] === undefined) {
+      acc[key] = {};
+    }
+
+    return acc[key] as Indexed;
+  }, object as Indexed)
+
+  return object;
+}
+
+export const isEqual = (a: object, b: object): boolean => {
+  return Object.entries(a).toString() === Object.entries(b).toString();
+}
+
+export const parseJson = (jsonString: string) => {
+  try {
+    return JSON.parse(jsonString);
+  } catch (err) {
+    alert('Не получилось обработать ответ на запрос')
   }
 }

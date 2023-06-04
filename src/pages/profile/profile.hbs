@@ -1,18 +1,15 @@
 <section class={{profile__wrapper}}>
-    <form>
+    <form name={{formName}}>
         <div class={{profile__top}}>
-            <label class={{profile__avatar}}>
-                <input type="file" name="avatar" hidden>
-                <img src={{avatarTmp}} alt="Avatar">
-            </label>
-            <p class={{avatar__name}}>Иван</p>
+            {{{avatar}}}
+            <p class={{avatar__name}}>{{profileName}}</p>
         </div>
         <div class={{profile__fields}}>
             <ul>
                 {{{email}}}
                 {{{login}}}
                 {{{name}}}
-                {{{lastname}}}
+                {{{lastName}}}
                 {{{chatName}}}
                 {{{phone}}}
             </ul>

@@ -1,9 +1,5 @@
-type Url = {
-    url: string;
-};
-
 interface Options {
-    method: string;
+    method?: string;
     data?: Record<string, any>;
     headers?: Record<string, any>;
     timeout?: number;
@@ -16,6 +12,8 @@ const enum Methods {
     DELETE = "DELETE",
 }
 
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown> | undefined;
+
 const queryStringify = (data: Record<string, any>): string => {
     if (typeof data !== 'object') {
         throw new Error('Data must be object');
@@ -27,7 +25,7 @@ const queryStringify = (data: Record<string, any>): string => {
 
 class HTTPTransport {
 
-    get = (url: Url, options: Options) => {
+    get: HTTPMethod = (url, options = {}) => {
         const { data } = options;
         if (data)`${url}${queryStringify(data)}`;
 
@@ -38,7 +36,7 @@ class HTTPTransport {
         );
     };
 
-    put = (url: Url, options: Options) => {
+    put: HTTPMethod = (url, options = {}) => {
         return this.request(
             url,
             { ...options, method: Methods.PUT },
@@ -46,7 +44,7 @@ class HTTPTransport {
         );
     };
 
-    post = (url: Url, options: Options) => {
+    post: HTTPMethod = (url, options = {}) => {
         return this.request(
             url,
             { ...options, method: Methods.POST },
@@ -54,7 +52,7 @@ class HTTPTransport {
         );
     };
 
-    delete = (url: Url, options: Options) => {
+    delete: HTTPMethod = (url, options = {}) => {
         return this.request(
             url,
             { ...options, method: Methods.DELETE },
@@ -63,12 +61,13 @@ class HTTPTransport {
     };
 
     request = (
-        url: Url,
-        options: Options = { method: Methods.GET },
+        url: string,
+        options: Options,
         timeout = 5000
     ) => {
         const { method, data, headers } = options;
         if (typeof url !== 'string') return;
+        if (method === undefined) return;
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
@@ -77,6 +76,7 @@ class HTTPTransport {
                 xhr.setRequestHeader(headerName, headers[headerName]);
             }
 
+            xhr.withCredentials = true
             xhr.onload = function () {
                 resolve(xhr);
             };
@@ -89,6 +89,8 @@ class HTTPTransport {
 
             if (method === Methods.GET || !data) {
                 xhr.send();
+            } else if (data instanceof FormData) {
+                xhr.send(data);
             } else {
                 xhr.send(JSON.stringify(data));
             }

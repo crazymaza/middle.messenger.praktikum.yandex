@@ -1,32 +1,111 @@
+import { router } from '../../../..';
+import Button from '../../../../components/button';
 import ChatListItem from '../../../../components/chatListItem';
-import { ItemDataInterface } from '../../../../types/interfaces';
+import Input from '../../../../components/inputs/text';
+import Link from '../../../../components/link';
+import ChatController from '../../../../controllers/ChatController';
 import Block from '../../../../utils/block';
-import { listItemsData } from '../../../../utils/constants';
+import { PROFILE_PATH, RESOURCES_URL } from '../../../../utils/constants';
+import store, { StoreEvents } from '../../../../utils/store';
 import leftSectionTemplate from './leftSection.hbs';
 import * as classes from './leftSection.module.scss';
+import avatarTmp from '../../../../img/avatarTmp.png';
+import Socket from '../../../../utils/Socket';
+import UserController from '../../../../controllers/UserController';
+import { ChatInerface } from '../../../../types/interfaces';
 
 class LeftSection extends Block {
   constructor(props: Record<string, any> = {}) {
+    const { chats, user } = store.getState();
+    if (!user) {
+      UserController.getUserAndSave();
+    }
+    if (!chats) {
+      ChatController.getChats();
+    }
 
-    const chats = listItemsData.map((item: ItemDataInterface) => {
-      return new ChatListItem({
-        title: item.title,
-        subtitle: item.subtitle,
-        date: item.date,
-        newMessage: item.newMessage,
-        active: item.active
+    store.on(StoreEvents.Updated, () => {
+      const { chats, activeChat, user, socket } = store.getState();
+
+      const chatList: any[] = [];
+      chats?.forEach((chat: ChatInerface) => {
+        chatList.push(new ChatListItem({
+          title: chat.title,
+          subtitle: chat?.last_message?.content || '',
+          date: chat?.last_message?.time ? new Date(chat.last_message.time).toLocaleString() : '',
+          newMessage: chat.unread_count,
+          active: activeChat?.id === chat.id,
+          chatId: chat.id,
+          avatarPath: chat.avatar ? `${RESOURCES_URL}${chat.avatar}` : avatarTmp,
+          events: {
+            click: () => {
+              this.children.chatList.forEach((chatItem: any) => {
+                if (chat.id === chatItem.props.chatId) {
+                  ChatController.getChatToketById(chat)
+                    ?.then((resp: any) => {
+                      if (!socket?.chat_id) {
+                        const socket = new Socket({
+                          chatId: `${chat?.id}`,
+                          token: resp.token,
+                          userId: user?.id
+                        });
+                        socket.open();
+                        store.set('socket', socket);
+                      }
+                    })
+                } else {
+                  socket?.close()
+                }
+              })
+            }
+          }
+        }))
       })
+      this.setProps({ chatList })
+    })
+
+    const profile = new Link({
+      text: 'Профиль >',
+      href: PROFILE_PATH,
+      classes: classes.profile,
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          router.go(PROFILE_PATH)
+        }
+      }
+    })
+
+    const newChatInput = new Input({
+      name: 'newСhat',
+      label: 'Название чата',
+      type: 'text',
+      events: {},
+    })
+
+    const createNewChat = new Button({
+      text: 'Создать новый чат',
+      type: 'submit',
+      events: {
+        click: (event: any) => {
+          event.preventDefault();
+          if (event.target && event.target.form[0]?.value) {
+            ChatController.createNewChat(event.target.form[0].value)
+              ?.then(() => {
+                event.target.form[0].value = null;
+                event.target.form[0].labels[0].classList.remove('active');
+              })
+          }
+        }
+      }
     })
 
     super('div', {
       ...props,
       ...classes,
-      chat1: chats[0],
-      chat2: chats[1],
-      chat3: chats[2],
-      chat4: chats[3],
-      chat5: chats[4],
-      chat6: chats[5],
+      profile,
+      newChatInput,
+      createNewChat
     });
   }
 

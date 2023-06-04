@@ -1,12 +1,13 @@
 <section class={{chat__left_section}}>
-    <a href="/profile" class={{profile}}>Профиль <span>></span></a>
+    {{{profile}}}
     <input type="text" class={{search}} placeholder="&#128269;&nbsp;Поиск">
-    <ul>
-        {{{chat1}}}
-        {{{chat2}}}
-        {{{chat3}}}
-        {{{chat4}}}
-        {{{chat5}}}
-        {{{chat6}}}
+    <ul class={{chat__listWrapper}}>
+        {{#each chatList}}
+            {{{chatList}}}
+        {{/each}}
     </ul>
+    <form class="{{chat__createNew}} formInputs">
+        {{{newChatInput}}}
+        {{{createNewChat}}}
+    </form>
 </section>

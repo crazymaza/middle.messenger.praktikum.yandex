@@ -48,29 +48,13 @@ export const rules: { [key: string]: { message: string; regExp?: RegExp; } } = {
         regExp: /^([0-9]+).{10,15}$/,
     },
     message: { message: "не должно быть пустым." },
+    display_name: {
+        message:
+            'латиница или кириллица, первая буква должна быть заглавной,' +
+            'без пробелов и без цифр, нет спецсимволов (допустим только дефис)',
+        regExp: /^[A-Z-А-Я]+[A-Za-zА-Яа-я-]+$/,
+    }
 };
-
-
-export const listItemsData: Array<ItemDataInterface> = [
-    {
-        title: 'Andrey', subtitle: 'Message', date: 'Mon', newMessage: 11,
-    },
-    {
-        title: 'Sergey', subtitle: 'Message', date: 'Mon', newMessage: 11,
-    },
-    {
-        title: 'Pavel', subtitle: 'Message', date: 'Mon', newMessage: 0, active: true,
-    },
-    {
-        title: 'Anna', subtitle: 'Message', date: 'Mon', newMessage: 11,
-    },
-    {
-        title: 'Polina', subtitle: 'Message', date: 'Mon', newMessage: 0,
-    },
-    {
-        title: 'Igor', subtitle: 'Message', date: 'Mon', newMessage: 100444,
-    },
-];
 
 export const loginInputs: Array<AuthInterface> = [
     { name: 'login', text: 'Логин', type: 'text' },
@@ -89,12 +73,12 @@ export const registerInputs: Array<AuthInterface> = [
 
 export const profileFields: ProfileType = {
     first: [
-        { title: 'Почта', value: 'pochta@yandex.ru' },
-        { title: 'Логин', value: 'ivanivanov' },
-        { title: 'Имя', value: 'Иван' },
-        { title: 'Фамилия', value: 'Иванов' },
-        { title: 'Имя в чате', value: 'Иван' },
-        { title: 'Телефон', value: '+7 (909) 967 30 30' },
+        { title: 'Почта', value: 'pochta@yandex.ru', label: 'email' },
+        { title: 'Логин', value: 'ivanivanov', label: 'login' },
+        { title: 'Имя', value: 'Иван', label: 'first_name' },
+        { title: 'Фамилия', value: 'Иванов', label: 'last_name' },
+        { title: 'Имя в чате', value: 'Иван', label: 'display_name' },
+        { title: 'Телефон', value: '+7 (909) 967 30 30', label: 'phone' },
     ],
     second: [
         {
@@ -104,12 +88,12 @@ export const profileFields: ProfileType = {
             title: 'Изменить пароль', value: '', link: true, href: '/changePassword',
         },
         {
-            title: 'Выйти', value: '', link: true, href: '/login',
+            title: 'Выйти', value: '', link: true, href: '/sign-in',
         },
     ],
     changeData: [
         {
-            title: 'Почта', value: 'pochta@yandex.ru', type: 'email', name: 'email',
+            title: 'Почта', value: 'pochta@yandex.ru', type: 'email', name: 'email'
         },
         {
             title: 'Логин', value: 'ivanivanov', type: 'text', name: 'login',
@@ -141,34 +125,18 @@ export const profileFields: ProfileType = {
     ],
 };
 
-export const messages: Array<MessageInterface> = [
-    {
-      text: `Привет! Смотри, тут всплыл интересный кусок
-     лунной космической истории — НАСА в какой-то
-      момент попросила Хассельблад адаптировать модель
-       SWC для полетов на Луну. Сейчас мы все знаем что
-        астронавты летали с моделью 500 EL — и к слову говоря,
-         все тушки этих камер все еще находятся на поверхности Луны,
-          так как астронавты с собой забрали только кассеты с пленкой.
-           Хассельблад в итоге адаптировал SWC для космоса, но что-то
-            пошло не так и на ракету они так никогда и не попали.
-             Всего их было произведено 25 штук, одну из них недавно продали
-              на аукционе за 45000 евро.`,
-    },
-    { isImg: true, img: camera, imgAlt: 'Camera' },
-    { isMine: true, text: 'Круто!' },
-  ];
-  
-
 export const BASE_URL = window.origin;
-export const SIGNIN_PATH = '/signin';
-export const SIGNUP_PATH = '/registry';
-export const PROFILE_PATH = '/profile';
+export const SIGNIN_PATH = '/sign-in';
+export const SIGNUP_PATH = '/sign-up';
+export const PROFILE_PATH = '/settings';
 export const PASSWORD_SETTING_PATH = '/changePassword';
 export const PROFILE_SETTING_PATH = '/changeData';
-export const CHATS_1_PATH = '/chat-1';
-export const CHATS_2_PATH = '/chat-2';
+export const CHATS_1_PATH = '/messenger';
+export const CHATS_2_PATH = '/messenger-2';
 export const ERROR404_PATH = '/404';
 export const ERROR500_PATH = '/500';
 export const ROOT_DIV = '#root';
 export const path = window.location.pathname;
+
+export const API_URL = 'https://ya-praktikum.tech/api/v2';
+export const RESOURCES_URL = 'https://ya-praktikum.tech/api/v2/resources';

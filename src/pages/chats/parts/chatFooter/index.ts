@@ -4,14 +4,15 @@ import chatFooterTemplate from './chatFooter.hbs';
 import * as classes from './chatFooter.module.scss';
 import clip from '../../../../img/clip.svg';
 import Button from '../../../../components/button';
-import { checkSubmitForm } from '../../../../utils/utils';
 import { rules } from '../../../../utils/constants';
+import store from '../../../../utils/store';
 
 class ChatFooter extends Block {
   constructor(props: Record<string, any> = {}) {
     const button1 = new InputFile({
       value: clip,
       isImg: true,
+      name: 'hidden'
     })
 
     const button2 = new Button({
@@ -20,10 +21,16 @@ class ChatFooter extends Block {
       type: 'submit',
       events: {
         click: (event: Event) => {
-          checkSubmitForm(event);
-          if (document.querySelector('input[name=message]')?.textContent === '') {
+          event.preventDefault();
+          const { socket } = store.getState();
+          const form: HTMLFormElement = document.forms.namedItem('messageForm') as HTMLFormElement;
+          const messageInput: HTMLInputElement = document.querySelector('input[name=message]') as HTMLInputElement;
+          if (messageInput.value.trim() === '') {
             document.getElementsByClassName(classes.error)[0].textContent = rules.message.message;
+            return;
           }
+          socket.send({ content: messageInput.value, type: "message" });
+          form.reset();
         }
       }
     })

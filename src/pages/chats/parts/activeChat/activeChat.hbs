@@ -2,9 +2,9 @@
     {{{header}}}
     <section class={{chat__inner}}>
         {{{date}}}
-        {{{message1}}}
-        {{{message2}}}
-        {{{message3}}}
+        {{#each chatMessages}}
+            {{{chatMessages}}}
+        {{/each}}
     </section>
     {{{footer}}}
 </section>

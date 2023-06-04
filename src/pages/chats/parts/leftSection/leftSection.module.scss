@@ -8,12 +8,17 @@
     background: v.$back-light;
 }
 
+.chat__listWrapper {
+    overflow-y: auto;
+}
+
 .profile {
     font-size: 12px;
     line-height: 14px;
     color: v.$helper;
     text-align: right;
     transition: all 0.3s ease;
+    padding-right: 10px;
 
     &:hover {
         color: adjust(v.$helper, -10%)
@@ -36,4 +41,11 @@
     padding-right: 10px;
     text-align: center;
     margin: 0 10px;
+}
+
+.chat__createNew {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 }

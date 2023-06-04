@@ -3,6 +3,9 @@ import chatListItemTemplate from './chatListItem.hbs';
 import * as classes from './chatListItem.module.scss';
 import type { ItemDataInterface } from '../../types/interfaces';
 import Block from '../../utils/block';
+import Button from '../button';
+import ChatController from '../../controllers/ChatController';
+import store from '../../utils/store';
 
 Handlebars.registerPartial('dots', (value) => {
   const stringText = String(value);
@@ -11,7 +14,20 @@ Handlebars.registerPartial('dots', (value) => {
 
 class ChatListItem extends Block {
   constructor(props: ItemDataInterface) {
-    super('li', { ...classes, ...props });
+    const deleteButton = new Button({
+      hasSymbol: true,
+      text: '',
+      type: 'button',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          ChatController.deleteChat(this.props.chatId)
+        }
+      }
+    })
+
+    super('li', { ...classes, ...props, deleteButton });
   }
 
   render(): DocumentFragment {

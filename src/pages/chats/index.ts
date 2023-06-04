@@ -5,6 +5,7 @@ import Wrapper from './parts/wrapper';
 class Chat extends Block {
   constructor(props: Record<string, any> = {}) {
     const wrapper = new Wrapper();
+  
     super('div', { ...props, wrapper });
   }
 

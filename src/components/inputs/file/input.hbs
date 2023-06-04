@@ -1,8 +1,8 @@
-<label class={{label__class}}>
+<label class={{labelClass}}>
     {{#if isImg}}
      <img src={{value}} alt="Upload file">
     {{else}}
         <span>{{value}}</span>
     {{/if}}
-    <input type="file" hidden>
+    <input type="file" name={{name}} hidden>
 </label>

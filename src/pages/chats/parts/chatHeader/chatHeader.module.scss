@@ -1,18 +1,26 @@
-@use "../../../../style.scss" as v;
+@use "../../../../style.scss"as v;
 
 .chat__nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-color: v.$background;
+    position: relative;
+    gap: 8px;
 
     .nav {
         &__avatar {
-            width: 34px;
-            height: 34px;
+            width: 40px;
+            height: 40px;
             background: v.$background;
-            margin-right: 8px;
             border-radius: 50%;
+
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: 50%;
+                aspect-ratio: 1;
+            }
         }
 
         &__name {
@@ -28,6 +36,14 @@
             font-size: 20px;
             cursor: pointer;
 
+            button {
+                padding: 5px;
+                background: none;
+                margin: 0;
+                color: currentcolor;
+                font-size: 20px;
+            }
+
             &::before,
             &::after {
                 content: ".";
@@ -35,12 +51,26 @@
             }
 
             &::before {
-                top: -5px;
+                top: 0;
+                left: 5px;
             }
 
             &::after {
-                right: 0;
-                bottom: -5px;
+                right: 5px;
+                bottom: 0;
+            }
+        }
+
+        &__buttons {
+            display: flex;
+            gap: 5px;
+
+            button {
+                padding: 5px;
+                max-width: 50px;
+                width: 30px;
+                height: 30px;
+                margin: 0;
             }
         }
     }
