@@ -1,5 +1,5 @@
 import loginTemplate from './login.hbs';
-import * as classes from '../forms.module.scss';
+import classes from '../forms.module.scss';
 import Block from '../../../utils/block';
 import Input from '../../../components/inputs/text';
 import Button from '../../../components/button';

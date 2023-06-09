@@ -2,7 +2,7 @@ import Divider from '../../../../components/divider';
 import Block from '../../../../utils/block';
 import ChatFooter from '../chatFooter';
 import activeChatTemplate from './activeChat.hbs';
-import * as classes from './activeChat.module.scss';
+import classes from './activeChat.module.scss';
 
 class ActiveChat extends Block {
   constructor(props: Record<string, any> = {}) {

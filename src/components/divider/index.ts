@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import dateTemplate from './divider.hbs';
-import * as classes from './divider.module.scss';
+import classes from './divider.module.scss';
 
 interface DividerInterface {
   value: string

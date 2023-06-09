@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import messageTemplate from './message.hbs';
-import * as classes from './message.module.scss';
+import classes from './message.module.scss';
 
 class Message extends Block {
   constructor(props: Record<string, any> = {}) {

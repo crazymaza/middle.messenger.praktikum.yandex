@@ -1,5 +1,4 @@
-import type { AuthInterface, ItemDataInterface, MessageInterface, ProfileType } from "../types/interfaces";
-import camera from '../img/camera.png';
+import type { AuthInterface, ProfileType } from "../types/interfaces";
 
 export const rules: { [key: string]: { message: string; regExp?: RegExp; } } = {
     login: {

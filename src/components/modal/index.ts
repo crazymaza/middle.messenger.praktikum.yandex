@@ -4,7 +4,7 @@ import store, { StoreEvents } from '../../utils/store';
 import Button from '../button';
 import Input from '../inputs/text';
 import modalTemplate from './modal.hbs';
-import * as classes from './modal.module.scss';
+import classes from './modal.module.scss';
 
 class Modal extends Block {
     constructor(props: Record<string, any> = {}) {
@@ -26,7 +26,7 @@ class Modal extends Block {
                         ?.then(() => alert('В чат добавлен пользователь'))
                         .catch(() => alert('Не удалось добавить пользователя'));
                     userId.value = '';
-                    document.querySelector('#modal')?.classList.remove('activeModal');
+                    document.querySelector('#modal')?.classList.remove(classes.modal__active);
                 }
             }
         });
@@ -34,7 +34,7 @@ class Modal extends Block {
             text: 'X',
             type: 'button',
             events: {
-                click: () => document.querySelector('#modal')?.classList.remove('activeModal')
+                click: () => document.querySelector('#modal')?.classList.remove(classes.modal__active)
             }
         })
 
@@ -52,7 +52,7 @@ class Modal extends Block {
                                 ?.then(() => alert('Пользователь удалён из чата'))
                                 .catch(() => alert('Не удалось удалить пользователя'));
                             userId.value = '';
-                            document.querySelector('#modal')?.classList.remove('activeModal');
+                            document.querySelector('#modal')?.classList.remove(classes.modal__active);
                         }
                     }
                 })
@@ -69,7 +69,7 @@ class Modal extends Block {
                                 ?.then(() => alert('В чат добавлен пользователь'))
                                 .catch(() => alert('Не удалось добавить пользователя'));
                             userId.value = '';
-                            document.querySelector('#modal')?.classList.remove('activeModal');
+                            document.querySelector('#modal')?.classList.remove(classes.modal__active);
                         }
                     }
                 })

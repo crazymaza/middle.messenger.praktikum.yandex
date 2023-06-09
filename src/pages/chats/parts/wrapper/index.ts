@@ -3,7 +3,7 @@ import Block from '../../../../utils/block';
 import LeftSection from '../leftSection';
 import RightSection from '../rightSection';
 import wrapperTemplate from './wrapper.hbs';
-import * as classes from './wrapper.module.scss';
+import classes from './wrapper.module.scss';
 
 class Wrapper extends Block {
   constructor(props: Record<string, any> = {}) {

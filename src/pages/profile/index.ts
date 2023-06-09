@@ -1,6 +1,6 @@
 import profileTemplate from './profile.hbs';
 import avatarTmp from '../../img/avatarTmp.png'
-import * as classes from './profile.module.scss';
+import classes from './profile.module.scss';
 import Block from '../../utils/block';
 import ProfileField from '../../components/profileField';
 import Button from '../../components/button';

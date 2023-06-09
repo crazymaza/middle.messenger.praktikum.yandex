@@ -1,6 +1,5 @@
 import { v4 as makeUUID } from 'uuid';
 import EventBus from '../eventBus';
-import { TemplateDelegate } from 'handlebars/runtime';
 
 const enum Events {
   INIT = "init",
@@ -63,7 +62,7 @@ class Block {
     });
   }
 
-  componentDidMount(oldProps: Props) {}
+  componentDidMount(_oldProps: Props) {}
 
   //стригерить измения
   dispatchComponentDidMount() {
@@ -76,7 +75,7 @@ class Block {
     this.eventBus.emit(Events.FLOW_RENDER);
   }
 
-  componentDidUpdate(oldProps: Props, newProps: Props) {
+  componentDidUpdate(_oldProps: Props, _newProps: Props) {
     return true;
   }
 
@@ -85,7 +84,7 @@ class Block {
       return;
     }
 
-    const { children, props } = this._getChildren(nextProps);
+    const { children } = this._getChildren(nextProps);
     Object.assign(this.children, children);
     Object.assign(this.props, nextProps);
   };

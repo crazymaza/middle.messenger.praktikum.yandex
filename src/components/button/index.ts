@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import buttonTemplate from './button.hbs';
-import * as classes from './button.module.scss';
+import classes from './button.module.scss';
 
 interface ButtonInterface {
     text: string,
