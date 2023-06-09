@@ -1,7 +1,7 @@
 import InputFile from '../../../../components/inputs/file';
 import Block from '../../../../utils/block';
 import chatFooterTemplate from './chatFooter.hbs';
-import * as classes from './chatFooter.module.scss';
+import classes from './chatFooter.module.scss';
 import clip from '../../../../img/clip.svg';
 import Button from '../../../../components/button';
 import { rules } from '../../../../utils/constants';

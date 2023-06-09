@@ -4,7 +4,7 @@ import store, { StoreEvents } from '../../../../utils/store';
 import ActiveChat from '../activeChat';
 import ChatHeader from '../chatHeader';
 import rightSectionTemplate from './rightSection.hbs';
-import * as classes from './rightSection.module.scss';
+import classes from './rightSection.module.scss';
 import avatarTmp from '../../../../img/avatarTmp.png'
 import Message from '../../../../components/message';
 

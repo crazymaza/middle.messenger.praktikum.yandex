@@ -1,5 +1,5 @@
 import errorTemplate from './404.hbs';
-import * as classes from '../errors.module.scss';
+import classes from '../errors.module.scss';
 import Block from '../../../utils/block';
 import { CHATS_1_PATH } from '../../../utils/constants';
 import Link from '../../../components/link';

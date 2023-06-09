@@ -5,7 +5,6 @@ import { UserApi } from "../api/user-api";
 import { LoginFormDataInterface, RegisterFormDataInterface } from "../types/interfaces";
 import { CHATS_1_PATH } from "../utils/constants";
 import { parseJson } from "../utils/utils";
-import UserController from "./UserController";
 
 class AuthController {
     authUser = (data: LoginFormDataInterface) => {

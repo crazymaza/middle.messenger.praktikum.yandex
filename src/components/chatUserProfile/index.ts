@@ -1,5 +1,5 @@
 import chatUserProfileTemplate from './chatUserProfile.hbs';
-import * as classes from './chatUserProfile.module.scss';
+import classes from './chatUserProfile.module.scss';
 import Block from '../../utils/block';
 import Button from '../button';
 import ChatController from '../../controllers/ChatController';

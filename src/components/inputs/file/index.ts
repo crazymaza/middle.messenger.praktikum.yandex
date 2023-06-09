@@ -1,6 +1,6 @@
 import Block from '../../../utils/block';
 import inputFileTemplate from './input.hbs';
-import * as classes from './input.module.scss';
+import classes from './input.module.scss';
 
 interface InputFileInterface {
   value: string,

@@ -8,7 +8,7 @@ import Block from '../../../../utils/block';
 import { PROFILE_PATH, RESOURCES_URL } from '../../../../utils/constants';
 import store, { StoreEvents } from '../../../../utils/store';
 import leftSectionTemplate from './leftSection.hbs';
-import * as classes from './leftSection.module.scss';
+import classes from './leftSection.module.scss';
 import avatarTmp from '../../../../img/avatarTmp.png';
 import Socket from '../../../../utils/Socket';
 import UserController from '../../../../controllers/UserController';

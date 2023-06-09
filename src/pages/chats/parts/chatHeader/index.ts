@@ -3,7 +3,8 @@ import ChatController from '../../../../controllers/ChatController';
 import Block from '../../../../utils/block';
 import store from '../../../../utils/store';
 import chatHeaderTemplate from './chatHeader.hbs';
-import * as classes from './chatHeader.module.scss';
+import classes from './chatHeader.module.scss';
+import modalClasses from '../../../../components/modal/modal.module.scss';
 
 class ChatHeader extends Block {
   constructor(props: Record<string, any> = {}) {
@@ -14,7 +15,7 @@ class ChatHeader extends Block {
       events: {
         click: () => {
           store.set('modal', 'add');
-          document.querySelector('#modal')?.classList.add('activeModal');
+          document.querySelector('#modal')?.classList.add(modalClasses.modal__active);
         }
       }
     })
@@ -25,7 +26,7 @@ class ChatHeader extends Block {
       events: {
         click: (event) => {
           store.set('modal', 'remove');
-          document.querySelector('#modal')?.classList.add('activeModal');
+          document.querySelector('#modal')?.classList.add(modalClasses.modal__active);
           event.preventDefault();
         }
       }

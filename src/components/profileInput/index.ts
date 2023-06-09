@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import profileInputTemplate from './profileInput.hbs';
-import * as classes from './profileInput.module.scss';
+import classes from './profileInput.module.scss';
 
 class ProfileInput extends Block {
   constructor(props: Record<string, any> = {}){

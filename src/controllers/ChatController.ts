@@ -16,7 +16,7 @@ class ChatController {
                 store.set('chatToken', parseJson(resp.response))
                 return parseJson(resp.response);
             })
-            .then((data) => {
+            .then((data: any) => {
                 store.set('activeChat', chat);
                 return data;
             })
@@ -29,7 +29,7 @@ class ChatController {
     createNewChat = (title: string) => {
         return chatApi.create(title)
             ?.then(() => this.getChats())
-            .catch(err => alert(err.message))
+            .catch((err: { message: any; }) => alert(err.message))
     }
 
     addUsersToChat = (users: number[], chatId: number) => {
@@ -39,7 +39,7 @@ class ChatController {
     deleteChat = (chatId: number) => {
         return chatApi.delete(chatId)
             ?.then(() => this.getChats())
-            .catch(err => alert(err.message))
+            .catch((err: { message: any; }) => alert(err.message))
     }
 
     deleteUser = (chatId: number, users: number[]) => {
