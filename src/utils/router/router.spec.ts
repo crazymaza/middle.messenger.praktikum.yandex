@@ -38,7 +38,7 @@ describe("Router", () => {
          </body>
        </html>`,
       { url: "http://localhost" }
-    );
+    ) as unknown as Window;
 
     global.window = window;
     global.document = window.document;

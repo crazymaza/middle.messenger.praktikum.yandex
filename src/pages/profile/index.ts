@@ -191,7 +191,7 @@ class Profile extends Block {
                   }
                 }
                 UserController.changeProfile(data)
-                  ?.then(resp => {
+                  ?.then((resp: { status: number; response: string; }) => {
                     if (resp.status === 200) {
                       const data = parseJson(resp.response);
                       this.setProps({ profileName: data.first_name })
